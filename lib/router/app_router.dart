@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/features/auth/presentation/login_screen.dart';
+import 'package:flutter_application_2/features/home/presentation/home_screen.dart';
 import 'package:flutter_application_2/features/onboarding/presentation/pages/launcher_screen.dart';
 import 'package:flutter_application_2/features/onboarding/presentation/pages/on_boarding_screen.dart';
 import 'package:go_router/go_router.dart';
@@ -10,6 +11,8 @@ class AppRouteName {
   static const String initial = '/';
   static const String onboardingScreen = '/onboarding';
   static const String loginScreen = "/login";
+  static const String registerScreen = "/register";
+  static const String homeScreen = "/home";
 
   // Nested Key
   static final GlobalKey<NavigatorState> navigatorKey =
@@ -42,6 +45,10 @@ class AppRoutes {
       GoRoute(
         path: AppRouteName.loginScreen,
         builder: (context, state) => LoginScreen(),
+      ),
+      GoRoute(
+        path: AppRouteName.homeScreen,
+        builder: (context, state) => HomeScreen(),
       ),
     ],
   );
