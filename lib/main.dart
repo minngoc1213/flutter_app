@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/presentations/screens/on_boarding_screen.dart';
+import 'package:flutter_application_2/core/di/di.dart';
+import 'package:flutter_application_2/router/app_router.dart';
 
 void main() {
+  setUp();
   runApp(const MyApp());
 }
 
@@ -10,10 +12,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Flutter Demo',
       theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
-      home: OnBoardingScreen()
+      routerConfig: AppRoutes().router,
     );
   }
 }
