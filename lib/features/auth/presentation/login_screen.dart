@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/common/text_field/custom_text_field.dart';
 import 'package:flutter_application_2/core/color/app_color.dart';
 import 'package:flutter_application_2/router/app_router.dart';
 import 'package:go_router/go_router.dart';
@@ -17,31 +18,9 @@ class LoginScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: .start,
           children: [
-            Text("Email"),
-            TextField(
-              controller: _emailController,
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: AppColors.pink,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(18),
-                  borderSide: BorderSide.none,
-                ),
-              ),
-            ),
-            Text("Password"),
-            TextField(
-              obscureText: true,
-              controller: _passWordController,
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: AppColors.pink,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(18),
-                  borderSide: BorderSide.none,
-                ),
-              ),
-            ),
+            CustomTextField(controller: _emailController, label: 'Email'),
+            CustomTextField(controller: _passWordController, label: 'Password'),
+
             ElevatedButton(
               onPressed: () {
                 context.go(AppRouteName.homeScreen);

@@ -36,7 +36,7 @@ class AppRoutes {
     routes: <RouteBase>[
       GoRoute(
         path: AppRouteName.initial,
-        builder: (context, state) => LauncherScreen(),
+        builder: (context, state) => LoginScreen(),
       ),
       GoRoute(
         path: AppRouteName.onboardingScreen,
