@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/common/elevated_button/custom_elevated_button.dart';
+import 'package:flutter_application_2/common/text_field/custom_password_field.dart';
 import 'package:flutter_application_2/common/text_field/custom_text_field.dart';
-import 'package:flutter_application_2/core/color/app_color.dart';
-import 'package:flutter_application_2/router/app_router.dart';
-import 'package:go_router/go_router.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -16,23 +15,17 @@ class LoginScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 36),
         child: Column(
-          crossAxisAlignment: .start,
+          crossAxisAlignment: .center,
           children: [
             CustomTextField(controller: _emailController, label: 'Email'),
-            CustomTextField(controller: _passWordController, label: 'Password'),
-
-            ElevatedButton(
-              onPressed: () {
-                context.go(AppRouteName.homeScreen);
-              },
-              child: Text("Log In"),
+            CustomPasswordField(
+              controller: _passWordController,
+              label: 'Password',
             ),
-            ElevatedButton(
-              onPressed: () {
-                context.go(AppRouteName.registerScreen);
-              },
-              child: Text("Sign Up"),
-            ),
+            SizedBox(height: 89,),
+            CustomElevatedButton(text: "Log In", horizontalPadding: 74,),
+            SizedBox(height: 27,),
+            CustomElevatedButton(text: "Sign Up", horizontalPadding: 65,)
           ],
         ),
       ),

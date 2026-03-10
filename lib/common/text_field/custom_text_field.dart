@@ -11,6 +11,7 @@ class CustomTextField extends StatelessWidget {
     this.label = '',
     this.fontSize,
     this.fontWeight = FontWeight.w500,
+    this.suffixIcon
   });
   final TextEditingController? controller;
   final Color? color;
@@ -19,6 +20,7 @@ class CustomTextField extends StatelessWidget {
   final String label;
   final double? fontSize;
   final FontWeight? fontWeight;
+  final IconButton? suffixIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +42,7 @@ class CustomTextField extends StatelessWidget {
               borderRadius: BorderRadius.circular(radius),
               borderSide: BorderSide.none,
             ),
+            suffixIcon: suffixIcon
           ),
         ),
       ],
