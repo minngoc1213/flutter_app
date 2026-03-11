@@ -1,6 +1,6 @@
 
 
-import 'package:flutter_application_2/common/dot_navigation_bar/DotNavigationBarItem.dart';
+import 'package:flutter_application_2/common/dot_navigation_bar/dot_navigation_bar_item.dart';
 
 import 'navigation_bar_content.dart';
 import 'package:flutter/material.dart';

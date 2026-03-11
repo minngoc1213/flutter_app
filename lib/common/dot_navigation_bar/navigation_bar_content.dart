@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/common/dot_navigation_bar/DotNavigationBarItem.dart';
+import 'package:flutter_application_2/common/dot_navigation_bar/dot_navigation_bar_item.dart';
 
 class NavigationBarContent extends StatelessWidget {
   const NavigationBarContent({
