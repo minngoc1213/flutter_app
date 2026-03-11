@@ -1,5 +1,3 @@
-
-
 import 'package:flutter_application_2/features/auth/domain/entities/user_entities.dart';
 import 'package:flutter_application_2/features/auth/presentation/bloc/auth_event.dart';
 import 'package:flutter_application_2/features/auth/presentation/bloc/auth_state.dart';
@@ -20,13 +18,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(state.copyWith(status: .failure));
   }
 
-  _onRegister(RegisterEvent event, Emitter<AuthState> emit) {
+  void _onRegister(RegisterEvent event, Emitter<AuthState> emit) {
     for (User user in state.users) {
       if (user.email == event.user.email) {
         emit(state.copyWith(status: .failure));
+        return;
       }
     }
-    state.users.add(event.user);
-    emit(state.copyWith(status: .success));
+    emit(state.copyWith(status: .success, users: [event.user, ...state.users]));
   }
 }
