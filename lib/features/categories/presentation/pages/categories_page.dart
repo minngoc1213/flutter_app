@@ -9,27 +9,34 @@ class CategoriesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 37),
+      bottom: false,
+      child: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 20,),
+            SizedBox(height: 20),
             Row(
               mainAxisAlignment: .end,
               mainAxisSize: .max,
               children: [
-                Text("Categories", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: AppColors.redPink),),
+                Text(
+                  "Categories",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.redPink,
+                  ),
+                ),
                 SizedBox(width: size.width * 0.05),
                 IconButton(onPressed: () {}, icon: Icon(Icons.notifications)),
                 IconButton(onPressed: () {}, icon: Icon(Icons.search)),
               ],
             ),
-            Spacer(),
+
             Text("Seafood"),
             Image(image: AssetImage("assets/png/category.png")),
-            SizedBox(height: 15.83,),
+            SizedBox(height: 15.83),
             GridView.builder(
-              padding: EdgeInsets.zero,
+              padding: EdgeInsets.symmetric(horizontal: 16),
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount: 6,
@@ -45,7 +52,8 @@ class CategoriesPage extends StatelessWidget {
                   label: "Breakfast",
                 );
               },
-            )
+            ),
+            SizedBox(height: 90),
           ],
         ),
       ),

@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/core/color/app_color.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return  Center(child: Text("Profile Page"));
+    return Scaffold(
+      backgroundColor: AppColors.pink,
+      body: Center(child: Text("Profile Page")),
+    );
   }
 }
