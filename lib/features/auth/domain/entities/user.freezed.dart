@@ -204,14 +204,14 @@ return $default(_that.fullName,_that.email,_that.mobile,_that.dob,_that.password
 
 
 class _User implements User {
-  const _User({required this.fullName, required this.email, required this.mobile, required this.dob, required this.password});
+  const _User({this.fullName = '', this.email = '', this.mobile = '', this.dob = '', this.password = ''});
   
 
-@override final  String fullName;
-@override final  String email;
-@override final  String mobile;
-@override final  String dob;
-@override final  String password;
+@override@JsonKey() final  String fullName;
+@override@JsonKey() final  String email;
+@override@JsonKey() final  String mobile;
+@override@JsonKey() final  String dob;
+@override@JsonKey() final  String password;
 
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.

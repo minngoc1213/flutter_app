@@ -13,7 +13,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   _onLogin(LoginEvent event, Emitter<AuthState> emit) {
     for (User user in state.users) {
-      if (user.email == )
+      
     }
   }
 
