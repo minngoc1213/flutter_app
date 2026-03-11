@@ -12,7 +12,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   void _onLogin(LoginEvent event, Emitter<AuthState> emit) {
     for (User user in state.users) {
       if (user.email == event.email && user.password == event.password) {
-        emit(state.copyWith(status: .success));
+        emit(state.copyWith(status: .success, user: user));
+        return;
       }
     }
     emit(state.copyWith(status: .failure));
