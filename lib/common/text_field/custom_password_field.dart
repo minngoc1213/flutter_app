@@ -6,10 +6,14 @@ class CustomPasswordField extends StatefulWidget {
   const CustomPasswordField({super.key,
     this.controller,
     this.color = AppColors.pink,
-    this.radius = 18,
+    this.radius = 28,
     this.label = '',
     this.fontSize,
-    this.fontWeight = FontWeight.w500,});
+    this.fontWeight = FontWeight.w500,
+    this.contentPaddingHorizontal = 25,
+    this.contentPaddingVertical = 10,
+    this.onTap,
+  });
 
   final TextEditingController? controller;
   final Color? color;
@@ -17,6 +21,10 @@ class CustomPasswordField extends StatefulWidget {
   final String label;
   final double? fontSize;
   final FontWeight? fontWeight;
+  final double contentPaddingHorizontal;
+  final double contentPaddingVertical;
+  final Function()? onTap;
+
   @override
   State<StatefulWidget> createState() => _CustomPasswordFieldState();
 }
@@ -40,6 +48,8 @@ class _CustomPasswordFieldState extends State<CustomPasswordField> {
       label: widget.label,
       fontSize: widget.fontSize,
       fontWeight: widget.fontWeight,
+      contentPaddingHorizontal: widget.contentPaddingHorizontal,
+      contentPaddingVertical: widget.contentPaddingVertical,
       suffixIcon: IconButton(
         onPressed: () {
           _toggleVisibility();

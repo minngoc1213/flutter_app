@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/features/auth/presentation/login_screen.dart';
+import 'package:flutter_application_2/features/auth/presentation/pages/login_screen.dart';
+import 'package:flutter_application_2/features/auth/presentation/pages/register_screen.dart';
 import 'package:flutter_application_2/features/home/presentation/home_screen.dart';
-import 'package:flutter_application_2/features/onboarding/presentation/pages/launcher_screen.dart';
 import 'package:flutter_application_2/features/onboarding/presentation/pages/on_boarding_screen.dart';
 import 'package:go_router/go_router.dart';
 
@@ -45,6 +45,10 @@ class AppRoutes {
       GoRoute(
         path: AppRouteName.loginScreen,
         builder: (context, state) => LoginScreen(),
+      ),
+      GoRoute(
+        path: AppRouteName.registerScreen,
+        builder: (context, state) => RegisterScreen(),
       ),
       GoRoute(
         path: AppRouteName.homeScreen,

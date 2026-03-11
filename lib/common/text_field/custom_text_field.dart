@@ -7,11 +7,14 @@ class CustomTextField extends StatelessWidget {
     this.controller,
     this.color = AppColors.pink,
     this.obscureText = false,
-    this.radius = 18,
+    this.radius = 28,
     this.label = '',
     this.fontSize,
     this.fontWeight = FontWeight.w500,
-    this.suffixIcon
+    this.suffixIcon,
+    this.contentPaddingHorizontal = 25,
+    this.contentPaddingVertical = 10,
+    this.onTap,
   });
   final TextEditingController? controller;
   final Color? color;
@@ -21,6 +24,9 @@ class CustomTextField extends StatelessWidget {
   final double? fontSize;
   final FontWeight? fontWeight;
   final IconButton? suffixIcon;
+  final double contentPaddingHorizontal;
+  final double contentPaddingVertical;
+  final Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +39,7 @@ class CustomTextField extends StatelessWidget {
         ),
         SizedBox(height: 10),
         TextField(
+          onTap: onTap,
           controller: controller,
           obscureText: obscureText,
           decoration: InputDecoration(
@@ -42,6 +49,7 @@ class CustomTextField extends StatelessWidget {
               borderRadius: BorderRadius.circular(radius),
               borderSide: BorderSide.none,
             ),
+            contentPadding: EdgeInsets.symmetric(horizontal: contentPaddingHorizontal, vertical: contentPaddingVertical),
             suffixIcon: suffixIcon
           ),
         ),
