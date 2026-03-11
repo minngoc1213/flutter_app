@@ -35,34 +35,29 @@ class _HomeAppState extends State<HomeApp> {
             _selectedIndex = val;
           });
         },
-        dotIndicatorColor: Colors.black,
-        unselectedItemColor: AppColors.white,
         // enableFloatingNavBar: false
         items: [
-          DotNavigationBarItem(
-            icon: Icon(Icons.home),
-            unselectedColor: AppColors.white,
-          ),
+          DotNavigationBarItem(icon: Icon(Icons.home, color: handleColor(0))),
 
           /// Likes
           DotNavigationBarItem(
-            icon: Icon(Icons.favorite_border),
-            unselectedColor: AppColors.white,
+            icon: Icon(Icons.favorite_border, color: handleColor(1)),
           ),
 
           /// Search
-          DotNavigationBarItem(
-            icon: Icon(Icons.search),
-            unselectedColor: AppColors.white,
-          ),
+          DotNavigationBarItem(icon: Icon(Icons.search, color: handleColor(2))),
 
           /// Profile
-          DotNavigationBarItem(
-            icon: Icon(Icons.person),
-            unselectedColor: AppColors.white,
-          ),
+          DotNavigationBarItem(icon: Icon(Icons.person, color: handleColor(3))),
         ],
       ),
     );
+  }
+
+  Color handleColor(int index) {
+    if (_selectedIndex == index) {
+      return Colors.white;
+    }
+    return Colors.black;
   }
 }
