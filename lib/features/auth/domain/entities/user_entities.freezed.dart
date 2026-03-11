@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'user.dart';
+part of 'user_entities.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -116,7 +116,10 @@ return $default(_that);case _:
 final _that = this;
 switch (_that) {
 case _User():
-return $default(_that);}
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -175,7 +178,10 @@ return $default(_that.fullName,_that.email,_that.mobile,_that.dob,_that.password
 @optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String fullName,  String email,  String mobile,  String dob,  String password)  $default,) {final _that = this;
 switch (_that) {
 case _User():
-return $default(_that.fullName,_that.email,_that.mobile,_that.dob,_that.password);}
+return $default(_that.fullName,_that.email,_that.mobile,_that.dob,_that.password);case _:
+  throw StateError('Unexpected subclass');
+
+}
 }
 /// A variant of `when` that fallback to returning `null`
 ///

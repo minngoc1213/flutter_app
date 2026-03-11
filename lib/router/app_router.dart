@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:flutter_application_2/features/auth/presentation/pages/login_screen.dart';
 import 'package:flutter_application_2/features/auth/presentation/pages/register_screen.dart';
 import 'package:flutter_application_2/features/home/presentation/home_screen.dart';
 import 'package:flutter_application_2/features/onboarding/presentation/pages/on_boarding_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRouteName {
@@ -48,7 +50,10 @@ class AppRoutes {
       ),
       GoRoute(
         path: AppRouteName.registerScreen,
-        builder: (context, state) => RegisterScreen(),
+        builder: (context, state) => BlocProvider(
+          create: (context) => AuthBloc(),
+          child: RegisterScreen(),
+        ),
       ),
       GoRoute(
         path: AppRouteName.homeScreen,

@@ -1,8 +1,9 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-part 'user.freezed.dart';
+
+part 'user_entities.freezed.dart';
 
 @freezed
-sealed class User with _$User {
+abstract class User with _$User {
   const factory User({
     @Default('') String fullName,
      @Default('') String email,

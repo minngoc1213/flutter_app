@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AuthState {
 
- List<User> get users; User? get user;
+ List<User> get users; User? get user; AuthStatus get status;
 /// Create a copy of AuthState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $AuthStateCopyWith<AuthState> get copyWith => _$AuthStateCopyWithImpl<AuthState>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthState&&const DeepCollectionEquality().equals(other.users, users)&&const DeepCollectionEquality().equals(other.user, user));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthState&&const DeepCollectionEquality().equals(other.users, users)&&const DeepCollectionEquality().equals(other.user, user)&&(identical(other.status, status) || other.status == status));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(users),const DeepCollectionEquality().hash(user));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(users),const DeepCollectionEquality().hash(user),status);
 
 @override
 String toString() {
-  return 'AuthState(users: $users, user: $user)';
+  return 'AuthState(users: $users, user: $user, status: $status)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $AuthStateCopyWith<$Res>  {
   factory $AuthStateCopyWith(AuthState value, $Res Function(AuthState) _then) = _$AuthStateCopyWithImpl;
 @useResult
 $Res call({
- List<User> users, User? user
+ List<User> users, User? user, AuthStatus status
 });
 
 
@@ -62,11 +62,12 @@ class _$AuthStateCopyWithImpl<$Res>
 
 /// Create a copy of AuthState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? users = null,Object? user = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? users = null,Object? user = freezed,Object? status = null,}) {
   return _then(_self.copyWith(
 users: null == users ? _self.users : users // ignore: cast_nullable_to_non_nullable
 as List<User>,user: freezed == user ? _self.user : user // ignore: cast_nullable_to_non_nullable
-as User?,
+as User?,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as AuthStatus,
   ));
 }
 
@@ -148,10 +149,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<User> users,  User? user)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<User> users,  User? user,  AuthStatus status)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AuthState() when $default != null:
-return $default(_that.users,_that.user);case _:
+return $default(_that.users,_that.user,_that.status);case _:
   return orElse();
 
 }
@@ -169,10 +170,10 @@ return $default(_that.users,_that.user);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<User> users,  User? user)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<User> users,  User? user,  AuthStatus status)  $default,) {final _that = this;
 switch (_that) {
 case _AuthState():
-return $default(_that.users,_that.user);}
+return $default(_that.users,_that.user,_that.status);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -186,10 +187,10 @@ return $default(_that.users,_that.user);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<User> users,  User? user)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<User> users,  User? user,  AuthStatus status)?  $default,) {final _that = this;
 switch (_that) {
 case _AuthState() when $default != null:
-return $default(_that.users,_that.user);case _:
+return $default(_that.users,_that.user,_that.status);case _:
   return null;
 
 }
@@ -201,7 +202,7 @@ return $default(_that.users,_that.user);case _:
 
 
 class _AuthState implements AuthState {
-  const _AuthState({final  List<User> users = const [], this.user}): _users = users;
+  const _AuthState({final  List<User> users = const [], this.user, this.status = AuthStatus.initial}): _users = users;
   
 
  final  List<User> _users;
@@ -212,6 +213,7 @@ class _AuthState implements AuthState {
 }
 
 @override final  User? user;
+@override@JsonKey() final  AuthStatus status;
 
 /// Create a copy of AuthState
 /// with the given fields replaced by the non-null parameter values.
@@ -223,16 +225,16 @@ _$AuthStateCopyWith<_AuthState> get copyWith => __$AuthStateCopyWithImpl<_AuthSt
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AuthState&&const DeepCollectionEquality().equals(other._users, _users)&&const DeepCollectionEquality().equals(other.user, user));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AuthState&&const DeepCollectionEquality().equals(other._users, _users)&&const DeepCollectionEquality().equals(other.user, user)&&(identical(other.status, status) || other.status == status));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_users),const DeepCollectionEquality().hash(user));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_users),const DeepCollectionEquality().hash(user),status);
 
 @override
 String toString() {
-  return 'AuthState(users: $users, user: $user)';
+  return 'AuthState(users: $users, user: $user, status: $status)';
 }
 
 
@@ -243,7 +245,7 @@ abstract mixin class _$AuthStateCopyWith<$Res> implements $AuthStateCopyWith<$Re
   factory _$AuthStateCopyWith(_AuthState value, $Res Function(_AuthState) _then) = __$AuthStateCopyWithImpl;
 @override @useResult
 $Res call({
- List<User> users, User? user
+ List<User> users, User? user, AuthStatus status
 });
 
 
@@ -260,11 +262,12 @@ class __$AuthStateCopyWithImpl<$Res>
 
 /// Create a copy of AuthState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? users = null,Object? user = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? users = null,Object? user = freezed,Object? status = null,}) {
   return _then(_AuthState(
 users: null == users ? _self._users : users // ignore: cast_nullable_to_non_nullable
 as List<User>,user: freezed == user ? _self.user : user // ignore: cast_nullable_to_non_nullable
-as User?,
+as User?,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as AuthStatus,
   ));
 }
 

@@ -1,4 +1,4 @@
-import 'package:flutter_application_2/features/auth/domain/entities/User.dart';
+import 'package:flutter_application_2/features/auth/domain/entities/user_entities.dart';
 
 sealed class AuthEvent{}
 
