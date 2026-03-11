@@ -24,9 +24,12 @@ class LoginScreen extends StatelessWidget {
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state.status == .success) {
-            ScaffoldMessenger.of(
+            final controller = ScaffoldMessenger.of(
               context,
             ).showSnackBar(SnackBar(content: Text("Log In success")));
+            controller.closed.then((value) {
+              context.go(AppRouteName.homeScreen);
+            });
           } else if (state.status == .failure) {
             ScaffoldMessenger.of(
               context,

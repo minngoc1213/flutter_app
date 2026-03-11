@@ -3,7 +3,7 @@ import 'package:flutter_application_2/core/di/di.dart';
 import 'package:flutter_application_2/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:flutter_application_2/features/auth/presentation/pages/login_screen.dart';
 import 'package:flutter_application_2/features/auth/presentation/pages/register_screen.dart';
-import 'package:flutter_application_2/features/home/presentation/home_screen.dart';
+import 'package:flutter_application_2/home_app.dart';
 import 'package:flutter_application_2/features/onboarding/presentation/pages/launcher_screen.dart';
 import 'package:flutter_application_2/features/onboarding/presentation/pages/on_boarding_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,7 +40,7 @@ class AppRoutes {
     routes: <RouteBase>[
       GoRoute(
         path: AppRouteName.initial,
-        builder: (context, state) => LauncherScreen(),
+        builder: (context, state) => HomeApp(),
       ),
       GoRoute(
         path: AppRouteName.onboardingScreen,
@@ -62,7 +62,7 @@ class AppRoutes {
       ),
       GoRoute(
         path: AppRouteName.homeScreen,
-        builder: (context, state) => HomeScreen(),
+        builder: (context, state) => HomeApp(),
       ),
     ],
   );

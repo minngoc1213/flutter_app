@@ -101,7 +101,7 @@ class RegisterScreen extends StatelessWidget {
                 },
                 text: "Sign Up",
                 backgroundColor: AppColors.redPink,
-                textColor: AppColors.colorWhite,
+                textColor: AppColors.white,
               ),
               SizedBox(height: 12),
               Row(
