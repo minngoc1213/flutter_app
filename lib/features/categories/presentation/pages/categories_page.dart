@@ -13,7 +13,6 @@ class CategoriesPage extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 20),
             Row(
               mainAxisAlignment: .end,
               mainAxisSize: .max,
@@ -42,8 +41,8 @@ class CategoriesPage extends StatelessWidget {
               itemCount: 6,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                crossAxisSpacing: 38.91,
-                mainAxisSpacing: 8,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
                 childAspectRatio: 0.9,
               ),
               itemBuilder: (BuildContext context, int index) {
