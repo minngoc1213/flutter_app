@@ -67,7 +67,7 @@ class AppRoutes {
       GoRoute(
         path: AppRouteName.categoryDetailScreen,
         builder: (context, state) => BlocProvider(
-          create: (context) => CategoryDetailsBloc(),
+          create: (context) => sl.get<CategoryDetailsBloc>(),
           child: CategoryDetailScreen(
             state.extra is String ? state.extra as String : "",
           ),

@@ -1,13 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/core/color/app_color.dart';
+import 'package:flutter_application_2/features/categories/presentation/bloc/category_details_bloc.dart';
+import 'package:flutter_application_2/features/categories/presentation/bloc/category_details_event.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CategoryDetailScreen extends StatelessWidget {
+class CategoryDetailScreen extends StatefulWidget {
   const CategoryDetailScreen(this.category, {super.key});
   final String category;
 
   @override
+  State<CategoryDetailScreen> createState() => _CategoryDetailScreenState();
+}
+
+class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
+  late final CategoryDetailsBloc categoryDetailsBloc;
+
+  @override
+  void initState() {
+    super.initState();
+    categoryDetailsBloc = context.read();
+    categoryDetailsBloc.add(GetCategoryDetailsEvent(widget.category));
+  }
+
+  @override
   Widget build(BuildContext context) {
-    print(category);
+    print(widget.category);
     final Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Padding(
@@ -20,7 +37,7 @@ class CategoryDetailScreen extends StatelessWidget {
               mainAxisSize: .max,
               children: [
                 IconButton(onPressed: () {}, icon: Icon(Icons.arrow_back)),
-                Text(category, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: AppColors.redPink),),
+                Text(widget.category, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: AppColors.redPink),),
                 SizedBox(width: size.width * 0.05),
                 IconButton(onPressed: () {}, icon: Icon(Icons.notifications)),
                 IconButton(onPressed: () {}, icon: Icon(Icons.search)),
