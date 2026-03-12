@@ -24,6 +24,8 @@ import '../features/categories/domain/use_case/get_categories_use_case.dart'
 import '../features/categories/domain/use_case/get_category_details_use_case.dart'
     as _i473;
 import '../features/categories/presentation/bloc/categories_bloc.dart' as _i105;
+import '../features/categories/presentation/bloc/category_details_bloc.dart'
+    as _i970;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -47,6 +49,9 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i473.GetCategoryDetailsUseCase(
         categoryRepositoryImpl: gh<_i346.CategoryRepositoryImpl>(),
       ),
+    );
+    gh.factory<_i970.CategoryDetailsBloc>(
+      () => _i970.CategoryDetailsBloc(gh<_i473.GetCategoryDetailsUseCase>()),
     );
     gh.factory<_i396.GetCategoriesUseCase>(
       () => _i396.GetCategoriesUseCase(
