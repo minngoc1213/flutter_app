@@ -3,6 +3,7 @@ import 'package:flutter_application_2/common/dot_navigation_bar/dot_navigation_b
 import 'package:flutter_application_2/common/dot_navigation_bar/nav_bars.dart';
 import 'package:flutter_application_2/core/color/app_color.dart';
 import 'package:flutter_application_2/features/categories/presentation/pages/categories_page.dart';
+import 'package:flutter_application_2/features/categories/presentation/pages/categories_provider.dart';
 import 'package:flutter_application_2/features/home/presentation/home_page.dart';
 import 'package:flutter_application_2/features/messenger/presentation/messenger_page.dart';
 import 'package:flutter_application_2/features/profile/presentation/profile_page.dart';
@@ -19,7 +20,7 @@ class _HomeAppState extends State<HomeApp> {
   List<Widget> pages = [
     HomePage(),
     MessengerPage(),
-    CategoriesPage(),
+    CategoriesProvider(),
     ProfilePage(),
   ];
   @override

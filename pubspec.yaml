@@ -46,6 +46,8 @@ dependencies:
   fpdart: ^1.2.0
   json_annotation: ^4.11.0
   injectable_generator: ^2.12.1
+  retrofit: ^4.9.2
+  retrofit_generator: ^10.2.3
 
 dev_dependencies:
   flutter_test:

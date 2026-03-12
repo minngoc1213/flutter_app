@@ -1,9 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/common/image/custom_image.dart';
 import 'package:flutter_application_2/core/color/app_color.dart';
+import 'package:flutter_application_2/di/di.dart';
+import 'package:flutter_application_2/features/categories/presentation/bloc/categories_bloc.dart';
+import 'package:flutter_application_2/features/categories/presentation/bloc/categories_event.dart';
 
-class CategoriesPage extends StatelessWidget {
+class CategoriesPage extends StatefulWidget {
   const CategoriesPage({super.key});
+
+  @override
+  State<CategoriesPage> createState() => _CategoriesPageState();
+}
+
+class _CategoriesPageState extends State<CategoriesPage> {
+  final CategoriesBloc categoriesBloc = sl.get();
+  @override
+  void initState() {
+    super.initState();
+    categoriesBloc.add(GetCategoriesEvent());
+  }
 
   @override
   Widget build(BuildContext context) {

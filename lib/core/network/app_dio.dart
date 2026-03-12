@@ -1,6 +1,7 @@
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_application_2/features/categories/data/data_source/categories_data_source.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
@@ -11,16 +12,13 @@ abstract class AppNetworkModule {
   Dio provideDio() {
     final Dio dio = Dio(
       BaseOptions(
+        baseUrl: 'https://www.themealdb.com/',
         receiveTimeout: const Duration(seconds: 30),
         connectTimeout: const Duration(seconds: 30),
         sendTimeout: const Duration(seconds: 30),
         headers: {'Content-Type': 'application/json'},
       ),
     );
-
-
-
-
 
     if (kDebugMode) {
       dio.interceptors.add(
@@ -38,7 +36,7 @@ abstract class AppNetworkModule {
     return dio;
   }
 
-  // @singleton
-  // UserDataSource getUserDataSource(Dio dio, String baseUrl) =>
-  //     UserDataSource(dio, baseUrl: baseUrl);
+  @singleton
+  CategoriesDataSource getCategoriesDataSource(Dio dio) =>
+      CategoriesDataSource(dio);
 }
