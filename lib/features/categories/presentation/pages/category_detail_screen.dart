@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/common/image/custom_image.dart';
 import 'package:flutter_application_2/core/color/app_color.dart';
+import 'package:flutter_application_2/features/categories/presentation/argument/category_argument.dart';
 import 'package:flutter_application_2/features/categories/presentation/bloc/category_details_bloc.dart';
 import 'package:flutter_application_2/features/categories/presentation/bloc/category_details_event.dart';
 import 'package:flutter_application_2/features/categories/presentation/bloc/category_details_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CategoryDetailScreen extends StatefulWidget {
-  const CategoryDetailScreen(this.category, {super.key});
-  final String category;
+  const CategoryDetailScreen(this.argument, {super.key});
+  final CategoryArgument argument;
 
   @override
   State<CategoryDetailScreen> createState() => _CategoryDetailScreenState();
@@ -21,12 +22,12 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
   void initState() {
     super.initState();
     categoryDetailsBloc = context.read();
-    categoryDetailsBloc.add(GetCategoryDetailsEvent(widget.category));
+    categoryDetailsBloc.add(GetCategoryDetailsEvent(widget.argument.category));
   }
 
   @override
   Widget build(BuildContext context) {
-    print(widget.category);
+    print(widget.argument.category);
     final Size size = MediaQuery.of(context).size;
     return BlocBuilder<CategoryDetailsBloc, CategoryDetailsState>(
       builder: (context, state) {
@@ -47,7 +48,7 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
                           icon: Icon(Icons.arrow_back),
                         ),
                         Text(
-                          widget.category,
+                          widget.argument.category,
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w600,
@@ -62,7 +63,19 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
                         IconButton(onPressed: () {}, icon: Icon(Icons.search)),
                       ],
                     ),
-                    Expanded(child: ListView(scrollDirection: .horizontal)),
+                    SizedBox(
+                      height: 40,
+                      child: ListView.builder(
+                        scrollDirection: .horizontal,
+                        itemBuilder: (context, index) {
+                          return TextButton(onPressed: () {
+                            setState(() {
+                              widget.argument.category = widget.argument.categories[index].strCategory;
+                            });
+                          }, child: Text(widget.argument.categories[index].strCategory));
+                        },
+                      ),
+                    ),
                     GridView.builder(
                       padding: EdgeInsets.symmetric(horizontal: 16),
                       physics: NeverScrollableScrollPhysics(),
@@ -76,11 +89,8 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
                       ),
                       itemBuilder: (BuildContext context, int index) {
                         return CustomImage(
-                          state.meals?.meals[index].strMealThumb ??
-                              "",
-                          label:
-                              state.meals?.meals[index].strMeal ??
-                              "",
+                          state.meals?.meals[index].strMealThumb ?? "",
+                          label: state.meals?.meals[index].strMeal ?? "",
                         );
                       },
                     ),

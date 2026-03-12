@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_2/common/image/custom_image.dart';
 import 'package:flutter_application_2/core/color/app_color.dart';
 import 'package:flutter_application_2/di/di.dart';
+import 'package:flutter_application_2/features/categories/presentation/argument/category_argument.dart';
 import 'package:flutter_application_2/features/categories/presentation/bloc/categories_bloc.dart';
 import 'package:flutter_application_2/features/categories/presentation/bloc/categories_event.dart';
 import 'package:flutter_application_2/features/categories/presentation/bloc/categories_state.dart';
@@ -79,8 +80,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                       onTap: () {
                         context.push(
                           AppRouteName.categoryDetailScreen,
-                          extra:
-                              state.categories?.categories[index].strCategory,
+                          extra: CategoryArgument(category: state.categories?.categories[index].strCategory??"", categories: state.categories?.categories??[])
                         );
                       },
                     );

@@ -3,6 +3,7 @@ import 'package:flutter_application_2/di/di.dart';
 import 'package:flutter_application_2/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:flutter_application_2/features/auth/presentation/pages/login_screen.dart';
 import 'package:flutter_application_2/features/auth/presentation/pages/register_screen.dart';
+import 'package:flutter_application_2/features/categories/presentation/argument/category_argument.dart';
 import 'package:flutter_application_2/features/categories/presentation/bloc/category_details_bloc.dart';
 import 'package:flutter_application_2/features/categories/presentation/pages/category_detail_screen.dart';
 import 'package:flutter_application_2/home_app.dart';
@@ -69,7 +70,7 @@ class AppRoutes {
         builder: (context, state) => BlocProvider(
           create: (context) => sl.get<CategoryDetailsBloc>(),
           child: CategoryDetailScreen(
-            state.extra is String ? state.extra as String : "",
+            state.extra is CategoryArgument ? state.extra as CategoryArgument : CategoryArgument(category: "", categories: List.empty()),
           ),
         ),
       ),

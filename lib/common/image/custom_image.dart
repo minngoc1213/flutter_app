@@ -25,7 +25,7 @@ class CustomImage extends StatelessWidget {
               fit: BoxFit.fill,
             ),
           ),
-          Text(label),
+          Text(label, overflow: TextOverflow.ellipsis, maxLines: 1,),
         ],
       ),
     );
