@@ -1,0 +1,10 @@
+import 'package:flutter_application_2/core/error/failure.dart';
+import 'package:fpdart/fpdart.dart';
+
+abstract class UseCase<Type, Params> {
+  Future<Either<Failure, Type>> call(Params params);
+}
+
+class NoParams {
+  const NoParams();
+}

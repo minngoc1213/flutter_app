@@ -25,12 +25,12 @@ $AuthStateCopyWith<AuthState> get copyWith => _$AuthStateCopyWithImpl<AuthState>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthState&&const DeepCollectionEquality().equals(other.users, users)&&const DeepCollectionEquality().equals(other.user, user)&&(identical(other.status, status) || other.status == status));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthState&&const DeepCollectionEquality().equals(other.users, users)&&(identical(other.user, user) || other.user == user)&&(identical(other.status, status) || other.status == status));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(users),const DeepCollectionEquality().hash(user),status);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(users),user,status);
 
 @override
 String toString() {
@@ -49,7 +49,7 @@ $Res call({
 });
 
 
-
+$UserCopyWith<$Res>? get user;
 
 }
 /// @nodoc
@@ -70,7 +70,19 @@ as User?,status: null == status ? _self.status : status // ignore: cast_nullable
 as AuthStatus,
   ));
 }
+/// Create a copy of AuthState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$UserCopyWith<$Res>? get user {
+    if (_self.user == null) {
+    return null;
+  }
 
+  return $UserCopyWith<$Res>(_self.user!, (value) {
+    return _then(_self.copyWith(user: value));
+  });
+}
 }
 
 
@@ -225,12 +237,12 @@ _$AuthStateCopyWith<_AuthState> get copyWith => __$AuthStateCopyWithImpl<_AuthSt
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AuthState&&const DeepCollectionEquality().equals(other._users, _users)&&const DeepCollectionEquality().equals(other.user, user)&&(identical(other.status, status) || other.status == status));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AuthState&&const DeepCollectionEquality().equals(other._users, _users)&&(identical(other.user, user) || other.user == user)&&(identical(other.status, status) || other.status == status));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_users),const DeepCollectionEquality().hash(user),status);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_users),user,status);
 
 @override
 String toString() {
@@ -249,7 +261,7 @@ $Res call({
 });
 
 
-
+@override $UserCopyWith<$Res>? get user;
 
 }
 /// @nodoc
@@ -271,7 +283,19 @@ as AuthStatus,
   ));
 }
 
+/// Create a copy of AuthState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$UserCopyWith<$Res>? get user {
+    if (_self.user == null) {
+    return null;
+  }
 
+  return $UserCopyWith<$Res>(_self.user!, (value) {
+    return _then(_self.copyWith(user: value));
+  });
+}
 }
 
 // dart format on
