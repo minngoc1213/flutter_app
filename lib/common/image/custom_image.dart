@@ -16,8 +16,8 @@ class CustomImage extends StatelessWidget {
     return Column(
       children: [
         Expanded(
-          child: Image(
-            image: AssetImage(imageDir),
+          child: Image.network(
+            imageDir,
             fit: BoxFit.fill,
           ),
         ),

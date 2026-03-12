@@ -24,8 +24,6 @@ class CategoriesBloc extends Bloc<CategoriesEvent, CategoriesState> {
       },
       (categories) {
         emit(state.copyWith(categories: categories));
-        print('---' * 30);
-        print(state.categories?.categories.first.idCategory);
       },
     );
   }

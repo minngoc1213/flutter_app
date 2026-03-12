@@ -15,12 +15,14 @@ import 'package:injectable/injectable.dart' as _i526;
 
 import '../core/network/app_dio.dart' as _i334;
 import '../features/auth/presentation/bloc/auth_bloc.dart' as _i59;
-import '../features/categories/data/data_source/categories_data_source.dart'
-    as _i299;
-import '../features/categories/data/repositories/get_categories_repositoryImpl.dart'
-    as _i485;
+import '../features/categories/data/data_source/category_data_source.dart'
+    as _i1068;
+import '../features/categories/data/repositories/category_repository_impl.dart'
+    as _i346;
 import '../features/categories/domain/use_case/get_categories_use_case.dart'
     as _i396;
+import '../features/categories/domain/use_case/get_category_details_use_case.dart'
+    as _i473;
 import '../features/categories/presentation/bloc/categories_bloc.dart' as _i105;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -33,17 +35,22 @@ extension GetItInjectableX on _i174.GetIt {
     final appNetworkModule = _$AppNetworkModule();
     gh.singleton<_i361.Dio>(() => appNetworkModule.provideDio());
     gh.singleton<_i59.AuthBloc>(() => _i59.AuthBloc());
-    gh.singleton<_i299.CategoriesDataSource>(
-      () => appNetworkModule.getCategoriesDataSource(gh<_i361.Dio>()),
+    gh.singleton<_i1068.CategoryDataSource>(
+      () => appNetworkModule.getCategoryDataSource(gh<_i361.Dio>()),
     );
-    gh.factory<_i485.GetCategoriesRepositoryImpl>(
-      () => _i485.GetCategoriesRepositoryImpl(
-        categoriesDataSource: gh<_i299.CategoriesDataSource>(),
+    gh.factory<_i346.CategoryRepositoryImpl>(
+      () => _i346.CategoryRepositoryImpl(
+        categoryDataSource: gh<_i1068.CategoryDataSource>(),
+      ),
+    );
+    gh.factory<_i473.GetCategoryDetailsUseCase>(
+      () => _i473.GetCategoryDetailsUseCase(
+        categoryRepositoryImpl: gh<_i346.CategoryRepositoryImpl>(),
       ),
     );
     gh.factory<_i396.GetCategoriesUseCase>(
       () => _i396.GetCategoriesUseCase(
-        getCategoriesRepositoryImpl: gh<_i485.GetCategoriesRepositoryImpl>(),
+        getCategoriesRepositoryImpl: gh<_i346.CategoryRepositoryImpl>(),
       ),
     );
     gh.factory<_i105.CategoriesBloc>(

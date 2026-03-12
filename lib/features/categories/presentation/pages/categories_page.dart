@@ -4,6 +4,8 @@ import 'package:flutter_application_2/core/color/app_color.dart';
 import 'package:flutter_application_2/di/di.dart';
 import 'package:flutter_application_2/features/categories/presentation/bloc/categories_bloc.dart';
 import 'package:flutter_application_2/features/categories/presentation/bloc/categories_event.dart';
+import 'package:flutter_application_2/features/categories/presentation/bloc/categories_state.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CategoriesPage extends StatefulWidget {
   const CategoriesPage({super.key});
@@ -26,49 +28,56 @@ class _CategoriesPageState extends State<CategoriesPage> {
     return SafeArea(
       bottom: false,
       child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: .end,
-              mainAxisSize: .max,
+        child: BlocBuilder<CategoriesBloc, CategoriesState>(
+          builder: (context, state) {
+            return Column(
               children: [
-                Text(
-                  "Categories",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.redPink,
-                  ),
+                Row(
+                  mainAxisAlignment: .end,
+                  mainAxisSize: .max,
+                  children: [
+                    Text(
+                      "Categories",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.redPink,
+                      ),
+                    ),
+                    SizedBox(width: size.width * 0.05),
+                    IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.notifications),
+                    ),
+                    IconButton(onPressed: () {}, icon: Icon(Icons.search)),
+                  ],
                 ),
-                SizedBox(width: size.width * 0.05),
-                IconButton(onPressed: () {}, icon: Icon(Icons.notifications)),
-                IconButton(onPressed: () {}, icon: Icon(Icons.search)),
-              ],
-            ),
 
-            Text("Seafood"),
-            Image(image: AssetImage("assets/png/category.png")),
-            SizedBox(height: 15.83),
-            GridView.builder(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: 6,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-                childAspectRatio: 0.9,
-              ),
-              itemBuilder: (BuildContext context, int index) {
-                return CustomImage(
-                  "assets/png/onboarding3_$index.png",
-                  label: "Breakfast",
-                );
-              },
-            ),
-            SizedBox(height: 90),
-          ],
+                Text("Seafood"),
+                Image(image: AssetImage("assets/png/category.png")),
+                SizedBox(height: 15.83),
+                GridView.builder(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: state.categories?.categories.length ?? 0,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                    childAspectRatio: 0.9,
+                  ),
+                  itemBuilder: (BuildContext context, int index) {
+                    return CustomImage(
+                      state.categories?.categories[index].strCategoryThumb ?? "",
+                      label: state.categories?.categories[index].strCategory ?? "",
+                    );
+                  },
+                ),
+                SizedBox(height: 90),
+              ],
+            );
+          },
         ),
       ),
     );

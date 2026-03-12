@@ -7,5 +7,6 @@ part 'categories_state.freezed.dart';
 sealed class CategoriesState with _$CategoriesState {
   const factory CategoriesState({
     @Default(null) CategoryEntities? categories,
+    @Default('') String category,
   }) = _CategoriesState;
 }

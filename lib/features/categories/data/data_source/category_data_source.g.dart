@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'categories_data_source.dart';
+part of 'category_data_source.dart';
 
 // dart format off
 
@@ -10,8 +10,8 @@ part of 'categories_data_source.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations,unused_element_parameter,avoid_unused_constructor_parameters,unreachable_from_main
 
-class _CategoriesDataSource implements CategoriesDataSource {
-  _CategoriesDataSource(this._dio, {this.baseUrl, this.errorLogger});
+class _CategoryDataSource implements CategoryDataSource {
+  _CategoryDataSource(this._dio, {this.baseUrl, this.errorLogger});
 
   final Dio _dio;
 
@@ -39,6 +39,33 @@ class _CategoriesDataSource implements CategoriesDataSource {
     late CategoryData _value;
     try {
       _value = CategoryData.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options, response: _result);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<CategoryDetailData> getCategoryDetails(String category) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'c': category};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<CategoryDetailData>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'api/json/v1/1/filter.php',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late CategoryDetailData _value;
+    try {
+      _value = CategoryDetailData.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options, response: _result);
       rethrow;
