@@ -5,7 +5,9 @@ import 'package:flutter_application_2/di/di.dart';
 import 'package:flutter_application_2/features/categories/presentation/bloc/categories_bloc.dart';
 import 'package:flutter_application_2/features/categories/presentation/bloc/categories_event.dart';
 import 'package:flutter_application_2/features/categories/presentation/bloc/categories_state.dart';
+import 'package:flutter_application_2/router/app_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class CategoriesPage extends StatefulWidget {
   const CategoriesPage({super.key});
@@ -29,6 +31,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
       bottom: false,
       child: SingleChildScrollView(
         child: BlocBuilder<CategoriesBloc, CategoriesState>(
+          bloc: categoriesBloc,
           builder: (context, state) {
             return Column(
               children: [
@@ -69,8 +72,17 @@ class _CategoriesPageState extends State<CategoriesPage> {
                   ),
                   itemBuilder: (BuildContext context, int index) {
                     return CustomImage(
-                      state.categories?.categories[index].strCategoryThumb ?? "",
-                      label: state.categories?.categories[index].strCategory ?? "",
+                      state.categories?.categories[index].strCategoryThumb ??
+                          "",
+                      label:
+                          state.categories?.categories[index].strCategory ?? "",
+                      onTap: () {
+                        context.push(
+                          AppRouteName.categoryDetailScreen,
+                          extra:
+                              state.categories?.categories[index].strCategory,
+                        );
+                      },
                     );
                   },
                 ),

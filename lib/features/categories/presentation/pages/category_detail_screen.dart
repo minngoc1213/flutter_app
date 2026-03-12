@@ -7,6 +7,7 @@ class CategoryDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(category);
     final Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Padding(

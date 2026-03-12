@@ -6,23 +6,28 @@ class CustomImage extends StatelessWidget {
     super.key,
     this.boxFit = .cover,
     this.label = '',
+    this.onTap
   });
   final String imageDir;
   final BoxFit? boxFit;
   final String label;
+  final Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: Image.network(
-            imageDir,
-            fit: BoxFit.fill,
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        children: [
+          Expanded(
+            child: Image.network(
+              imageDir,
+              fit: BoxFit.fill,
+            ),
           ),
-        ),
-        Text(label),
-      ],
+          Text(label),
+        ],
+      ),
     );
   }
 }

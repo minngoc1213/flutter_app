@@ -3,6 +3,8 @@ import 'package:flutter_application_2/di/di.dart';
 import 'package:flutter_application_2/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:flutter_application_2/features/auth/presentation/pages/login_screen.dart';
 import 'package:flutter_application_2/features/auth/presentation/pages/register_screen.dart';
+import 'package:flutter_application_2/features/categories/presentation/bloc/category_details_bloc.dart';
+import 'package:flutter_application_2/features/categories/presentation/pages/category_detail_screen.dart';
 import 'package:flutter_application_2/home_app.dart';
 import 'package:flutter_application_2/features/onboarding/presentation/pages/on_boarding_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,6 +18,7 @@ class AppRouteName {
   static const String loginScreen = "/login";
   static const String registerScreen = "/register";
   static const String homeScreen = "/home";
+  static const String categoryDetailScreen = "/category-detail";
 
   // Nested Key
   static final GlobalKey<NavigatorState> navigatorKey =
@@ -47,10 +50,8 @@ class AppRoutes {
       ),
       GoRoute(
         path: AppRouteName.loginScreen,
-        builder: (context, state) => BlocProvider.value(
-          value: sl.get<AuthBloc>(),
-          child: LoginScreen(),
-        ),
+        builder: (context, state) =>
+            BlocProvider.value(value: sl.get<AuthBloc>(), child: LoginScreen()),
       ),
       GoRoute(
         path: AppRouteName.registerScreen,
@@ -62,6 +63,15 @@ class AppRoutes {
       GoRoute(
         path: AppRouteName.homeScreen,
         builder: (context, state) => HomeApp(),
+      ),
+      GoRoute(
+        path: AppRouteName.categoryDetailScreen,
+        builder: (context, state) => BlocProvider(
+          create: (context) => CategoryDetailsBloc(),
+          child: CategoryDetailScreen(
+            state.extra is String ? state.extra as String : "",
+          ),
+        ),
       ),
     ],
   );
