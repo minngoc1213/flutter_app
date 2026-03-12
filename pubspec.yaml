@@ -45,6 +45,7 @@ dependencies:
   injectable: ^2.7.1+4
   fpdart: ^1.2.0
   json_annotation: ^4.11.0
+  injectable_generator: ^2.12.1
 
 dev_dependencies:
   flutter_test:

@@ -8,7 +8,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        children: [Container(width: 100, height: 870, color: AppColors.pink)],
+        children: [Container(width: 100, height: 500, color: AppColors.pink)],
       ),
     );
   }

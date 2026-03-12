@@ -2,7 +2,9 @@ import 'package:flutter_application_2/features/auth/domain/entities/user_entitie
 import 'package:flutter_application_2/features/auth/presentation/bloc/auth_event.dart';
 import 'package:flutter_application_2/features/auth/presentation/bloc/auth_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 
+@singleton
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc() : super(AuthState()) {
     on<LoginEvent>(_onLogin);

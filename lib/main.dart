@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/core/di/di.dart';
+import 'package:flutter_application_2/di/di.dart';
 import 'package:flutter_application_2/router/app_router.dart';
 
 void main() {
-  setUp();
+  WidgetsFlutterBinding.ensureInitialized();
+  configureDependencies();
   runApp(const MyApp());
 }
 
