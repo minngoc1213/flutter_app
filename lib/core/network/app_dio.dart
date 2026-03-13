@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_application_2/features/categories/data/data_source/category_data_source.dart';
+import 'package:flutter_application_2/features/categories/data/data_source/meal_data_source.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
@@ -35,6 +36,8 @@ abstract class AppNetworkModule {
   }
 
   @singleton
-  CategoryDataSource getCategoryDataSource(Dio dio) =>
-      CategoryDataSource(dio);
+  CategoryDataSource getCategoryDataSource(Dio dio) => CategoryDataSource(dio);
+
+  @singleton
+  MealDataSource getMealDataSource(Dio dio) => MealDataSource(dio);
 }

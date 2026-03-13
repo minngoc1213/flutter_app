@@ -5,7 +5,9 @@ import 'package:flutter_application_2/features/categories/presentation/argument/
 import 'package:flutter_application_2/features/categories/presentation/bloc/category_details_bloc.dart';
 import 'package:flutter_application_2/features/categories/presentation/bloc/category_details_event.dart';
 import 'package:flutter_application_2/features/categories/presentation/bloc/category_details_state.dart';
+import 'package:flutter_application_2/router/app_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class CategoryDetailScreen extends StatefulWidget {
   const CategoryDetailScreen(this.argument, {super.key});
@@ -32,47 +34,55 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
     return BlocBuilder<CategoryDetailsBloc, CategoryDetailsState>(
       builder: (context, state) {
         return Scaffold(
+          appBar: AppBar(
+            title: Text(
+              state.category,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+                color: AppColors.redPink,
+              ),
+            ),
+            centerTitle: true,
+            actions: [
+              IconButton(onPressed: () {}, icon: Icon(Icons.notifications)),
+              IconButton(onPressed: () {}, icon: Icon(Icons.search)),
+            ],
+          ),
           body: SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 37),
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: .end,
-                      mainAxisSize: .max,
-                      children: [
-                        IconButton(
-                          onPressed: () {},
-                          icon: Icon(Icons.arrow_back),
-                        ),
-                        Text(
-                          widget.argument.category,
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600,
-                            color: AppColors.redPink,
-                          ),
-                        ),
-                        SizedBox(width: size.width * 0.05),
-                        IconButton(
-                          onPressed: () {},
-                          icon: Icon(Icons.notifications),
-                        ),
-                        IconButton(onPressed: () {}, icon: Icon(Icons.search)),
-                      ],
-                    ),
                     SizedBox(
                       height: 40,
                       child: ListView.builder(
+                        itemCount: widget.argument.categories.length,
                         scrollDirection: .horizontal,
                         itemBuilder: (context, index) {
-                          return TextButton(onPressed: () {
-                            setState(() {
-                              widget.argument.category = widget.argument.categories[index].strCategory;
-                            });
-                          }, child: Text(widget.argument.categories[index].strCategory));
+                          return ElevatedButton(
+                            onPressed: () {
+                              categoryDetailsBloc.add(
+                                GetCategoryDetailsEvent(
+                                  widget.argument.categories[index].strCategory,
+                                ),
+                              );
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor:
+                                  widget
+                                          .argument
+                                          .categories[index]
+                                          .strCategory ==
+                                      state.category
+                                  ? AppColors.redPink
+                                  : AppColors.pink,
+                            ),
+                            child: Text(
+                              widget.argument.categories[index].strCategory,
+                            ),
+                          );
                         },
                       ),
                     ),
@@ -91,6 +101,9 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
                         return CustomImage(
                           state.meals?.meals[index].strMealThumb ?? "",
                           label: state.meals?.meals[index].strMeal ?? "",
+                          onTap: () {
+                            context.push(AppRouteName.mealDetailsScreen, extra: state.meals?.meals[index].idMeal);
+                          },
                         );
                       },
                     ),

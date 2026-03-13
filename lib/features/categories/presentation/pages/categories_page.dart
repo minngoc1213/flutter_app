@@ -28,68 +28,64 @@ class _CategoriesPageState extends State<CategoriesPage> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    return SafeArea(
-      bottom: false,
-      child: SingleChildScrollView(
-        child: BlocBuilder<CategoriesBloc, CategoriesState>(
-          bloc: categoriesBloc,
-          builder: (context, state) {
-            return Column(
-              children: [
-                Row(
-                  mainAxisAlignment: .end,
-                  mainAxisSize: .max,
-                  children: [
-                    Text(
-                      "Categories",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.redPink,
-                      ),
+    return Scaffold(
+      appBar: AppBar(
+            title: Text(
+              "Categories",
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+                color: AppColors.redPink,
+              ),
+            ),
+            centerTitle: true,
+            actions: [
+              IconButton(onPressed: () {}, icon: Icon(Icons.notifications)),
+              IconButton(onPressed: () {}, icon: Icon(Icons.search)),
+            ],
+          ),
+      body: SafeArea(
+        bottom: false,
+        child: SingleChildScrollView(
+          child: BlocBuilder<CategoriesBloc, CategoriesState>(
+            bloc: categoriesBloc,
+            builder: (context, state) {
+              return Column(
+                children: [
+                  Text("Seafood"),
+                  Image(image: AssetImage("assets/png/category.png")),
+                  SizedBox(height: 15.83),
+                  GridView.builder(
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: state.categories?.categories.length ?? 0,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
+                      childAspectRatio: 0.9,
                     ),
-                    SizedBox(width: size.width * 0.05),
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.notifications),
-                    ),
-                    IconButton(onPressed: () {}, icon: Icon(Icons.search)),
-                  ],
-                ),
-
-                Text("Seafood"),
-                Image(image: AssetImage("assets/png/category.png")),
-                SizedBox(height: 15.83),
-                GridView.builder(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: state.categories?.categories.length ?? 0,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    childAspectRatio: 0.9,
+                    itemBuilder: (BuildContext context, int index) {
+                      return CustomImage(
+                        state.categories?.categories[index].strCategoryThumb ??
+                            "",
+                        label:
+                            state.categories?.categories[index].strCategory ?? "",
+                        onTap: () {
+                          context.push(
+                            AppRouteName.categoryDetailScreen,
+                            extra: CategoryArgument(category: state.categories?.categories[index].strCategory??"", categories: state.categories?.categories??[])
+                          );
+                        },
+                      );
+                    },
                   ),
-                  itemBuilder: (BuildContext context, int index) {
-                    return CustomImage(
-                      state.categories?.categories[index].strCategoryThumb ??
-                          "",
-                      label:
-                          state.categories?.categories[index].strCategory ?? "",
-                      onTap: () {
-                        context.push(
-                          AppRouteName.categoryDetailScreen,
-                          extra: CategoryArgument(category: state.categories?.categories[index].strCategory??"", categories: state.categories?.categories??[])
-                        );
-                      },
-                    );
-                  },
-                ),
-                SizedBox(height: 90),
-              ],
-            );
-          },
+                  SizedBox(height: 90),
+                ],
+              );
+            },
+          ),
         ),
       ),
     );

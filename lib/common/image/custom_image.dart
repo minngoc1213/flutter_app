@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 class CustomImage extends StatelessWidget {
   const CustomImage(
@@ -20,9 +20,12 @@ class CustomImage extends StatelessWidget {
       child: Column(
         children: [
           Expanded(
-            child: Image.network(
-              imageDir,
-              fit: BoxFit.fill,
+            child: Container(
+              decoration: BoxDecoration(borderRadius: .circular(10),color: Colors.blue),
+              child: Image.network(
+                imageDir,
+                fit: BoxFit.fitHeight,
+              ),
             ),
           ),
           Text(label, overflow: TextOverflow.ellipsis, maxLines: 1,),

@@ -5,7 +5,9 @@ import 'package:flutter_application_2/features/auth/presentation/pages/login_scr
 import 'package:flutter_application_2/features/auth/presentation/pages/register_screen.dart';
 import 'package:flutter_application_2/features/categories/presentation/argument/category_argument.dart';
 import 'package:flutter_application_2/features/categories/presentation/bloc/category_details_bloc.dart';
+import 'package:flutter_application_2/features/categories/presentation/bloc/meal_details_bloc.dart';
 import 'package:flutter_application_2/features/categories/presentation/pages/category_detail_screen.dart';
+import 'package:flutter_application_2/features/categories/presentation/pages/meal_detail_screen.dart';
 import 'package:flutter_application_2/home_app.dart';
 import 'package:flutter_application_2/features/onboarding/presentation/pages/on_boarding_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,6 +22,7 @@ class AppRouteName {
   static const String registerScreen = "/register";
   static const String homeScreen = "/home";
   static const String categoryDetailScreen = "/category-detail";
+  static const String mealDetailsScreen = "/meal-detail";
 
   // Nested Key
   static final GlobalKey<NavigatorState> navigatorKey =
@@ -70,7 +73,18 @@ class AppRoutes {
         builder: (context, state) => BlocProvider(
           create: (context) => sl.get<CategoryDetailsBloc>(),
           child: CategoryDetailScreen(
-            state.extra is CategoryArgument ? state.extra as CategoryArgument : CategoryArgument(category: "", categories: List.empty()),
+            state.extra is CategoryArgument
+                ? state.extra as CategoryArgument
+                : CategoryArgument(category: "", categories: List.empty()),
+          ),
+        ),
+      ),
+      GoRoute(
+        path: AppRouteName.mealDetailsScreen,
+        builder: (context, state) => BlocProvider(
+          create: (context) => sl.get<MealDetailsBloc>(),
+          child: MealDetailScreen(
+            state.extra is String ? state.extra as String : "",
           ),
         ),
       ),

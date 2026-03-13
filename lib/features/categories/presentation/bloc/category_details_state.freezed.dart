@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$CategoryDetailsState {
 
- CategoryDetailEntities? get meals;
+ CategoryDetailEntities? get meals; String get category;
 /// Create a copy of CategoryDetailsState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $CategoryDetailsStateCopyWith<CategoryDetailsState> get copyWith => _$CategoryDe
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CategoryDetailsState&&(identical(other.meals, meals) || other.meals == meals));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CategoryDetailsState&&(identical(other.meals, meals) || other.meals == meals)&&(identical(other.category, category) || other.category == category));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,meals);
+int get hashCode => Object.hash(runtimeType,meals,category);
 
 @override
 String toString() {
-  return 'CategoryDetailsState(meals: $meals)';
+  return 'CategoryDetailsState(meals: $meals, category: $category)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $CategoryDetailsStateCopyWith<$Res>  {
   factory $CategoryDetailsStateCopyWith(CategoryDetailsState value, $Res Function(CategoryDetailsState) _then) = _$CategoryDetailsStateCopyWithImpl;
 @useResult
 $Res call({
- CategoryDetailEntities? meals
+ CategoryDetailEntities? meals, String category
 });
 
 
@@ -62,10 +62,11 @@ class _$CategoryDetailsStateCopyWithImpl<$Res>
 
 /// Create a copy of CategoryDetailsState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? meals = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? meals = freezed,Object? category = null,}) {
   return _then(_self.copyWith(
 meals: freezed == meals ? _self.meals : meals // ignore: cast_nullable_to_non_nullable
-as CategoryDetailEntities?,
+as CategoryDetailEntities?,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 /// Create a copy of CategoryDetailsState
@@ -159,10 +160,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( CategoryDetailEntities? meals)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( CategoryDetailEntities? meals,  String category)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CategoryDetailsState() when $default != null:
-return $default(_that.meals);case _:
+return $default(_that.meals,_that.category);case _:
   return orElse();
 
 }
@@ -180,10 +181,10 @@ return $default(_that.meals);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( CategoryDetailEntities? meals)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( CategoryDetailEntities? meals,  String category)  $default,) {final _that = this;
 switch (_that) {
 case _CategoryDetailsState():
-return $default(_that.meals);}
+return $default(_that.meals,_that.category);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -197,10 +198,10 @@ return $default(_that.meals);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( CategoryDetailEntities? meals)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( CategoryDetailEntities? meals,  String category)?  $default,) {final _that = this;
 switch (_that) {
 case _CategoryDetailsState() when $default != null:
-return $default(_that.meals);case _:
+return $default(_that.meals,_that.category);case _:
   return null;
 
 }
@@ -212,10 +213,11 @@ return $default(_that.meals);case _:
 
 
 class _CategoryDetailsState implements CategoryDetailsState {
-  const _CategoryDetailsState({this.meals = null});
+  const _CategoryDetailsState({this.meals = null, this.category = ""});
   
 
 @override@JsonKey() final  CategoryDetailEntities? meals;
+@override@JsonKey() final  String category;
 
 /// Create a copy of CategoryDetailsState
 /// with the given fields replaced by the non-null parameter values.
@@ -227,16 +229,16 @@ _$CategoryDetailsStateCopyWith<_CategoryDetailsState> get copyWith => __$Categor
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CategoryDetailsState&&(identical(other.meals, meals) || other.meals == meals));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CategoryDetailsState&&(identical(other.meals, meals) || other.meals == meals)&&(identical(other.category, category) || other.category == category));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,meals);
+int get hashCode => Object.hash(runtimeType,meals,category);
 
 @override
 String toString() {
-  return 'CategoryDetailsState(meals: $meals)';
+  return 'CategoryDetailsState(meals: $meals, category: $category)';
 }
 
 
@@ -247,7 +249,7 @@ abstract mixin class _$CategoryDetailsStateCopyWith<$Res> implements $CategoryDe
   factory _$CategoryDetailsStateCopyWith(_CategoryDetailsState value, $Res Function(_CategoryDetailsState) _then) = __$CategoryDetailsStateCopyWithImpl;
 @override @useResult
 $Res call({
- CategoryDetailEntities? meals
+ CategoryDetailEntities? meals, String category
 });
 
 
@@ -264,10 +266,11 @@ class __$CategoryDetailsStateCopyWithImpl<$Res>
 
 /// Create a copy of CategoryDetailsState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? meals = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? meals = freezed,Object? category = null,}) {
   return _then(_CategoryDetailsState(
 meals: freezed == meals ? _self.meals : meals // ignore: cast_nullable_to_non_nullable
-as CategoryDetailEntities?,
+as CategoryDetailEntities?,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 
