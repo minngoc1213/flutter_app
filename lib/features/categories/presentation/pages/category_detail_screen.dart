@@ -102,7 +102,12 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
                           state.meals?.meals[index].strMealThumb ?? "",
                           label: state.meals?.meals[index].strMeal ?? "",
                           onTap: () {
-                            context.push(AppRouteName.mealDetailsScreen, extra: state.meals?.meals[index].idMeal);
+                            context.push(
+                              AppRouteName.mealDetailsScreen,
+                              extra: state.meals?.meals[index].idMeal,
+                            );
+                            print('-------------');
+                            print(state.meals?.meals[index].idMeal);
                           },
                         );
                       },
