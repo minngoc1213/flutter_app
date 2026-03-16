@@ -38,12 +38,12 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
         mute: false,
         autoPlay: true,
         disableDragSeek: false,
-        loop: false,
+        loop: true,
         isLive: false,
-        forceHD: false,
+        forceHD: true,
         enableCaption: true,
       ),
-    )..addListener(listener);
+    );
     setState(() {});
   }
 
