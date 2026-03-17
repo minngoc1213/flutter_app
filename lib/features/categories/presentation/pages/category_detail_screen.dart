@@ -117,8 +117,8 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       crossAxisSpacing: 10,
-                      mainAxisSpacing: 50,
-                      childAspectRatio: 0.9,
+                      mainAxisSpacing: 10,
+                      childAspectRatio: 0.72,
                     ),
                     itemBuilder: (BuildContext context, int index) {
                       // return CustomImage(
@@ -134,23 +134,75 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
                       //     print(state.meals?.meals[index].idMeal);
                       //   },
                       // );
-                      return Column(
+                      return Stack(
                         children: [
-                          Image.network(state.meals?.meals[index].strMealThumb ?? "", fit: .fitHeight, height: 169,),
                           Container(
+                            margin: EdgeInsets.symmetric(horizontal: 5),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(14),
+                              border: Border(
+                                bottom: BorderSide(color: AppColors.redPink),
+                                left: BorderSide(color: AppColors.redPink),
+                                right: BorderSide(color: AppColors.redPink),
+                              ),
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 6,
+                              horizontal: 15,
+                            ),
                             child: Column(
+                              mainAxisAlignment: .end,
+                              crossAxisAlignment: .start,
                               children: [
-                                Text(state.meals?.meals[index].strMeal ?? ""),
-                                Row(children: [
-                                  Text("5"),
-                                  Icon(Icons.star),
-                                  Spacer(),
-                                  Icon(Icons.timer),
-                                  Text("15 min")
-                                ],)
+                                Text(
+                                  state.meals?.meals[index].strMeal ?? "",
+                                  maxLines: 3,
+                                  style: TextStyle(
+                                    // color: AppColors.redPink,
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w300,
+                                  ),
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      "5",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: AppColors.redPink,
+                                      ),
+                                    ),
+                                    Icon(
+                                      Icons.star,
+                                      size: 12,
+                                      color: AppColors.redPink,
+                                    ),
+                                    Spacer(),
+                                    Icon(
+                                      Icons.timer,
+                                      size: 12,
+                                      color: AppColors.redPink,
+                                    ),
+                                    Text(
+                                      "15 min",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: AppColors.redPink,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ],
                             ),
-                          )
+                          ),
+                          ClipRRect(
+                            borderRadius: BorderRadiusGeometry.circular(14),
+                            child: Image.network(
+                              state.meals?.meals[index].strMealThumb ?? "",
+                              fit: .fitHeight,
+                              height: 153,
+                            ),
+                          ),
                         ],
                       );
                     },
