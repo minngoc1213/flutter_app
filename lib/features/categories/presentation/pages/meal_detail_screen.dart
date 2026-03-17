@@ -35,10 +35,10 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
           ) ??
           "",
       flags: const YoutubePlayerFlags(
-        mute: false,
-        autoPlay: true,
+        mute: true,
+        autoPlay: false,
         disableDragSeek: false,
-        loop: true,
+        loop: false,
         isLive: false,
         forceHD: true,
         enableCaption: true,
@@ -99,46 +99,74 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          YoutubePlayerBuilder(
+                            onExitFullScreen: () {
+                              SystemChrome.setPreferredOrientations(
+                                DeviceOrientation.values,
+                              );
+                            },
+                            player: YoutubePlayer(
+                              controller: _controller!,
+                              showVideoProgressIndicator: true,
+                              progressIndicatorColor: Colors.blueAccent,
+                              topActions: <Widget>[
+                                const SizedBox(width: 8.0),
+                                Expanded(
+                                  child: Text(
+                                    _controller?.metadata.title ?? '',
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18.0,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
+                                  ),
+                                ),
+                                IconButton(
+                                  icon: const Icon(
+                                    Icons.settings,
+                                    color: Colors.white,
+                                    size: 25.0,
+                                  ),
+                                  onPressed: () {},
+                                ),
+                              ],
+                              onReady: () {},
+                              onEnded: (data) {},
+                            ),
+                            builder: (BuildContext p1, Widget p2) {
+                              return Column(children: [p2]);
+                            },
+                          ),
                           if (_controller != null)
-                            YoutubePlayerBuilder(
-                              onExitFullScreen: () {
-                                SystemChrome.setPreferredOrientations(
-                                  DeviceOrientation.values,
-                                );
-                              },
-                              player: YoutubePlayer(
-                                controller: _controller!,
-                                showVideoProgressIndicator: true,
-                                progressIndicatorColor: Colors.blueAccent,
-                                topActions: <Widget>[
-                                  const SizedBox(width: 8.0),
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 15,
+                                vertical: 7,
+                              ),
+                              height: 50,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15)),
+                                color: AppColors.redPink,
+                              ),
+                              child: Row(
+                                children: [
                                   Expanded(
+                                    flex: 1,
                                     child: Text(
-                                      _controller?.metadata.title ?? '',
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 18.0,
-                                      ),
-                                      overflow: TextOverflow.ellipsis,
+                                      state.meals?.meals[0].strMeal ?? "",
+                                      style: TextStyle(color: AppColors.white, fontWeight: FontWeight.w500, fontSize: 20),
                                       maxLines: 1,
                                     ),
                                   ),
-                                  IconButton(
-                                    icon: const Icon(
-                                      Icons.settings,
-                                      color: Colors.white,
-                                      size: 25.0,
-                                    ),
-                                    onPressed: () {},
-                                  ),
+                                  Icon(Icons.star),
+                                  Text("4.2"),
+                                  Icon(Icons.timer),
+                                  Text("2.273"),
                                 ],
-                                onReady: () {},
-                                onEnded: (data) {},
                               ),
-                              builder: (BuildContext p1, Widget p2) {
-                                return Column(children: [p2]);
-                              },
                             ),
+
                           const SizedBox(height: 25),
                           Row(
                             children: [
@@ -164,15 +192,22 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                             ],
                           ),
                           const SizedBox(height: 25),
-                          const Divider(height: 3),
+                          const Divider(height: 3, color: AppColors.redPink,),
                           const SizedBox(height: 25),
-                          Text(
-                            "Details",
-                            style: TextStyle(
-                              color: AppColors.redPink,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
-                            ),
+                          Row(
+                            children: [
+                              Text(
+                                "Details",
+                                style: TextStyle(
+                                  color: AppColors.redPink,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              SizedBox(width: 15,),
+                              Icon(Icons.timer, size: 12,),
+                              Text("45 min", style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),)
+                            ],
                           ),
                           Text(meal.strInstructions),
                           const SizedBox(height: 25),
@@ -193,7 +228,9 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                               return Row(
                                 children: [
                                   const Icon(Icons.arrow_right),
-                                  Text(meal.strIngredient[index]),
+                                  Text(
+                                    "${meal.strMeasure[index]} ${meal.strIngredient[index]}",
+                                  ),
                                 ],
                               );
                             },

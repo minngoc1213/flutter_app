@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_application_2/core/use_case/use_case.dart';
+import 'package:flutter_application_2/features/categories/domain/entities/category_entities.dart';
 import 'package:flutter_application_2/features/categories/domain/use_case/get_categories_use_case.dart';
 import 'package:flutter_application_2/features/categories/presentation/bloc/categories_event.dart';
 import 'package:flutter_application_2/features/categories/presentation/bloc/categories_state.dart';
@@ -23,7 +24,16 @@ class CategoriesBloc extends Bloc<CategoriesEvent, CategoriesState> {
         print(failure.error);
       },
       (categories) {
-        emit(state.copyWith(categories: categories));
+        if (categories.categories.isNotEmpty) {
+          emit(
+            state.copyWith(
+              first: categories.categories.first,
+              categories: CategoryEntities(
+                categories: categories.categories.skip(1).toList(),
+              ),
+            ),
+          );
+        }
       },
     );
   }

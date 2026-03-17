@@ -8,5 +8,6 @@ sealed class CategoriesState with _$CategoriesState {
   const factory CategoriesState({
     @Default(null) CategoryEntities? categories,
     @Default('') String category,
+    @Default(null) CategoryElementEntities? first,
   }) = _CategoriesState;
 }

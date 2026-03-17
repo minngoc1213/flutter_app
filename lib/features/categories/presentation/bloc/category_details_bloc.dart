@@ -17,13 +17,14 @@ class CategoryDetailsBloc
     GetCategoryDetailsEvent event,
     Emitter<CategoryDetailsState> emit,
   ) async {
+    emit(state.copyWith(category: event.category, meals: null));
     final result = await getCategoryDetailsUseCase.call(event.category);
     result.fold(
       (failure) {
         print(failure.error);
       },
       (meals) {
-        emit(state.copyWith(meals: meals, category: event.category));
+        emit(state.copyWith(meals: meals));
       },
     );
   }

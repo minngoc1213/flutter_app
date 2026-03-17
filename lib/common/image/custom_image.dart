@@ -20,15 +20,16 @@ class CustomImage extends StatelessWidget {
       child: Column(
         children: [
           Expanded(
-            child: Container(
-              decoration: BoxDecoration(borderRadius: .circular(10),color: Colors.blue),
+            child: ClipRRect(
+              borderRadius: BorderRadiusGeometry.circular(18),
               child: Image.network(
                 imageDir,
                 fit: BoxFit.fitHeight,
               ),
             ),
           ),
-          Text(label, overflow: TextOverflow.ellipsis, maxLines: 1,),
+          SizedBox(height: 6,),
+          Text(label, overflow: TextOverflow.ellipsis, maxLines: 1, style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),),
         ],
       ),
     );

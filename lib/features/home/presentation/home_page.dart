@@ -48,28 +48,28 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               Text("Trending Recipe"),
-              CustomImage(
-                "https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg",
-                label: "Salami and cheese pizza",
-                boxFit: BoxFit.cover,
-              ),
+              // CustomImage(
+              //   "https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg",
+              //   label: "Salami and cheese pizza",
+              //   boxFit: BoxFit.cover,
+              // ),
               Card(
                 color: AppColors.redPink,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text("Your Recipes"),
-                    SizedBox(
-                      height: 130,
-                      child: ListView.builder(
-                        itemCount: 3,
-                        scrollDirection: Axis.horizontal,
+                    // SizedBox(
+                    //   height: 130,
+                    //   child: ListView.builder(
+                    //     itemCount: 3,
+                    //     scrollDirection: Axis.horizontal,
 
-                        itemBuilder: (context, index) {
-                          return CustomImage("https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg", label: "Tiramisu",);
-                        },
-                      ),
-                    ),
+                    //     itemBuilder: (context, index) {
+                    //       return CustomImage("https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg", label: "Tiramisu",);
+                    //     },
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
