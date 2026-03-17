@@ -50,70 +50,112 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
             ],
           ),
           body: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 37),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 40,
-                      child: ListView.builder(
-                        itemCount: widget.argument.categories.length,
-                        scrollDirection: .horizontal,
-                        itemBuilder: (context, index) {
-                          return ElevatedButton(
-                            onPressed: () {
-                              categoryDetailsBloc.add(
-                                GetCategoryDetailsEvent(
-                                  widget.argument.categories[index].strCategory,
-                                ),
-                              );
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor:
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 40,
+                    child: ListView.separated(
+                      padding: EdgeInsets.symmetric(horizontal: 25),
+                      itemCount: widget.argument.categories.length,
+                      scrollDirection: .horizontal,
+                      separatorBuilder: (context, index) {
+                        return SizedBox(width: 10);
+                      },
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () {
+                            categoryDetailsBloc.add(
+                              GetCategoryDetailsEvent(
+                                widget.argument.categories[index].strCategory,
+                              ),
+                            );
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 9,
+                              vertical: 5,
+                            ),
+                            alignment: .center,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color:
                                   widget
                                           .argument
                                           .categories[index]
                                           .strCategory ==
                                       state.category
                                   ? AppColors.redPink
-                                  : AppColors.pink,
+                                  : AppColors.transparent,
                             ),
                             child: Text(
                               widget.argument.categories[index].strCategory,
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                                color:
+                                    widget
+                                            .argument
+                                            .categories[index]
+                                            .strCategory ==
+                                        state.category
+                                    ? AppColors.white
+                                    : AppColors.redPink,
+                              ),
                             ),
-                          );
-                        },
-                      ),
-                    ),
-                    GridView.builder(
-                      padding: EdgeInsets.symmetric(horizontal: 16),
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: state.meals?.meals.length ?? 0,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10,
-                        childAspectRatio: 0.9,
-                      ),
-                      itemBuilder: (BuildContext context, int index) {
-                        return CustomImage(
-                          state.meals?.meals[index].strMealThumb ?? "",
-                          label: state.meals?.meals[index].strMeal ?? "",
-                          onTap: () {
-                            context.push(
-                              AppRouteName.mealDetailsScreen,
-                              extra: state.meals?.meals[index].idMeal,
-                            );
-                            print('-------------');
-                            print(state.meals?.meals[index].idMeal);
-                          },
+                          ),
                         );
                       },
                     ),
-                  ],
-                ),
+                  ),
+                  SizedBox(height: 26),
+                  GridView.builder(
+                    padding: EdgeInsets.symmetric(horizontal: 37),
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: state.meals?.meals.length ?? 0,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 50,
+                      childAspectRatio: 0.9,
+                    ),
+                    itemBuilder: (BuildContext context, int index) {
+                      // return CustomImage(
+                      //   state.meals?.meals[index].strMealThumb ?? "",
+                      //   label: state.meals?.meals[index].strMeal ?? "",
+                      //   boxFit: .cover,
+                      //   onTap: () {
+                      //     context.push(
+                      //       AppRouteName.mealDetailsScreen,
+                      //       extra: state.meals?.meals[index].idMeal,
+                      //     );
+                      //     print('-------------');
+                      //     print(state.meals?.meals[index].idMeal);
+                      //   },
+                      // );
+                      return Column(
+                        children: [
+                          Image.network(state.meals?.meals[index].strMealThumb ?? "", fit: .fitHeight, height: 169,),
+                          Container(
+                            child: Column(
+                              children: [
+                                Text(state.meals?.meals[index].strMeal ?? ""),
+                                Row(children: [
+                                  Text("5"),
+                                  Icon(Icons.star),
+                                  Spacer(),
+                                  Icon(Icons.timer),
+                                  Text("15 min")
+                                ],)
+                              ],
+                            ),
+                          )
+                        ],
+                      );
+                    },
+                  ),
+                ],
               ),
             ),
           ),
