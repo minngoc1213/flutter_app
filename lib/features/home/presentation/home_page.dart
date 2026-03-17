@@ -25,34 +25,109 @@ class HomePage extends StatelessWidget {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: size.width * 0.1),
+          padding: EdgeInsets.symmetric(horizontal: 36),
           child: Column(
             crossAxisAlignment: .start,
             children: [
-              Text("Hi! Diane"),
-              Text("What are you cooking today"),
+              Text(
+                "Hi! Diane",
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.w400,
+                  color: AppColors.redPink,
+                ),
+              ),
+              Text(
+                "What are you cooking today",
+                style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400),
+              ),
               SizedBox(
                 height: 40,
-                child: ListView.builder(
+                child: ListView.separated(
                   itemCount: categories.length,
-                  scrollDirection: Axis.horizontal,
+                  scrollDirection: .horizontal,
+                  separatorBuilder: (context, index) {
+                    return SizedBox(width: 19);
+                  },
                   itemBuilder: (context, index) {
-                    return ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.pink,
+                    return GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 9,
+                          vertical: 5,
+                        ),
+                        alignment: .center,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(18),
+                          color: AppColors.transparent,
+                        ),
+                        child: Text(
+                          categories[index],
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            color: AppColors.redPink,
+                          ),
+                        ),
                       ),
-                      child: Text(categories[index]),
                     );
                   },
                 ),
               ),
-              Text("Trending Recipe"),
-              // CustomImage(
-              //   "https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg",
-              //   label: "Salami and cheese pizza",
-              //   boxFit: BoxFit.cover,
-              // ),
+              Text(
+                "Trending Recipe",
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.redPink,
+                ),
+              ),
+              Stack(
+                children: [
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 7),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      border: .all(color: AppColors.sweetPink),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: .end,
+                      crossAxisAlignment: .start,
+                      children: [
+                        Row(children: [
+                          Text("Salami and cheese pizza"),
+                          Spacer(),
+                            Icon(Icons.timer, color: AppColors.sweetPink),
+                            Text(
+                              "30 min",
+                              style: TextStyle(color: AppColors.sweetPink),
+                            ),
+                        ],),
+                        Row(
+                          children: [
+                            Text("This is a quick overview of the ingredients..."),
+                            Spacer(),
+                            Text(
+                              "5",
+                              style: TextStyle(color: AppColors.sweetPink),
+                            ),
+                            Icon(Icons.star, color: AppColors.sweetPink),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  ClipRRect(
+                    borderRadius: .circular(15),
+                    child: Image.network(
+                      "https://www.themealdb.com/images/category/goat.png",
+                      fit: .fitWidth,
+                      height: 169,
+                    ),
+                  ),
+                ],
+              ),
               Card(
                 color: AppColors.redPink,
                 child: Column(
