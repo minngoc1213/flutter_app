@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/core/color/app_color.dart';
 import 'package:flutter_application_2/router/app_router.dart';
 import 'package:go_router/go_router.dart';
 
@@ -13,28 +14,30 @@ class OnBoardingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        
+      ),
       body: PageView(
         physics: NeverScrollableScrollPhysics(),
         controller: _pageController,
-        children: [Page1(size), Page2(size), Page3(size, context)],
+        children: [firstPage(size), secondPage(size), thirdPage(size, context)],
       ),
     );
   }
 
-  Widget Page1(Size size) {
+  Widget firstPage(Size size) {
     return Column(
       children: [
         Container(
-          height: size.height * 0.2,
           child: Column(
             crossAxisAlignment: .start,
             children: [
-              Text("Get inspired"),
-              Text("Get inspired with our daily recipe recommendations."),
+              Text("Get inspired", style: TextStyle(fontSize: 20, fontWeight: .w600),),
+              Text("Get inspired with our daily recipe recommendations.", style: TextStyle(fontSize: 13, fontWeight: .w400),),
             ],
           ),
         ),
+        SizedBox(height: 44,),
         Expanded(
           child: Container(
             decoration: BoxDecoration(
@@ -46,7 +49,7 @@ class OnBoardingScreen extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  height: size.height * 0.3,
+                  height: 284,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [Colors.white, Colors.transparent],
@@ -77,7 +80,8 @@ class OnBoardingScreen extends StatelessWidget {
                           curve: Curves.ease,
                         );
                       },
-                      child: Text("Continue"),
+                      style: ElevatedButton.styleFrom(backgroundColor: AppColors.pink, padding: EdgeInsets.symmetric(horizontal: 56, vertical: 7)),
+                      child: Text("Continue", style: TextStyle(fontSize: 20, fontWeight: .w600, color: AppColors.sweetPink),),
                     ),
                   ],
                 ),
@@ -89,29 +93,29 @@ class OnBoardingScreen extends StatelessWidget {
     );
   }
 
-  Widget Page2(Size size) {
+  Widget secondPage(Size size) {
     return Column(
       children: [
         Container(
-          height: size.height * 0.2,
           child: Column(
             crossAxisAlignment: .start,
             children: [
-              IconButton(
-                onPressed: () {
-                  _pageController.animateToPage(
-                    0,
-                    duration: Duration(milliseconds: 300),
-                    curve: Curves.ease,
-                  );
-                },
-                icon: Icon(Icons.arrow_back),
-              ),
-              Text("Get an increase your skills"),
-              Text("Learn essential cooking techniques at your own pace."),
+              // IconButton(
+              //   onPressed: () {
+              //     _pageController.animateToPage(
+              //       0,
+              //       duration: Duration(milliseconds: 300),
+              //       curve: Curves.ease,
+              //     );
+              //   },
+              //   icon: Icon(Icons.arrow_back),
+              // ),
+              Text("Get an increase your skills", style: TextStyle(fontSize: 20, fontWeight: .w600),),
+              Text("Learn essential cooking techniques at your own pace.", style: TextStyle(fontSize: 13, fontWeight: .w400),),
             ],
           ),
         ),
+        SizedBox(height: 44,),
         Expanded(
           child: Container(
             decoration: BoxDecoration(
@@ -166,7 +170,7 @@ class OnBoardingScreen extends StatelessWidget {
     );
   }
 
-  Widget Page3(Size size, BuildContext context) {
+  Widget thirdPage(Size size, BuildContext context) {
     return Column(
       children: [
         IconButton(

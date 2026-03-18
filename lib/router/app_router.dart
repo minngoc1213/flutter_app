@@ -8,6 +8,7 @@ import 'package:flutter_application_2/features/categories/presentation/bloc/cate
 import 'package:flutter_application_2/features/categories/presentation/bloc/meal_details_bloc.dart';
 import 'package:flutter_application_2/features/categories/presentation/pages/category_detail_screen.dart';
 import 'package:flutter_application_2/features/categories/presentation/pages/meal_detail_screen.dart';
+import 'package:flutter_application_2/features/onboarding/presentation/pages/launcher_screen.dart';
 import 'package:flutter_application_2/home_app.dart';
 import 'package:flutter_application_2/features/onboarding/presentation/pages/on_boarding_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -46,7 +47,7 @@ class AppRoutes {
     routes: <RouteBase>[
       GoRoute(
         path: AppRouteName.initial,
-        builder: (context, state) => HomeApp(),
+        builder: (context, state) => LauncherScreen(),
       ),
       GoRoute(
         path: AppRouteName.onboardingScreen,
