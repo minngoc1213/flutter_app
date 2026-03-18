@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/common/custom_app_bar/custom_app_bar.dart';
 import 'package:flutter_application_2/core/color/app_color.dart';
 
 class HomePage extends StatelessWidget {
@@ -15,11 +16,9 @@ class HomePage extends StatelessWidget {
     final Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.notifications)),
-          IconButton(onPressed: () {}, icon: Icon(Icons.search)),
-        ],
+      appBar: CustomAppBar(
+        greeting: 'Hi! Diane',
+        subtitle: 'What are you cooking today',
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -27,18 +26,6 @@ class HomePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: .start,
             children: [
-              Text(
-                "Hi! Diane",
-                style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.w400,
-                  color: AppColors.redPink,
-                ),
-              ),
-              Text(
-                "What are you cooking today",
-                style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400),
-              ),
               SizedBox(
                 height: 40,
                 child: ListView.separated(

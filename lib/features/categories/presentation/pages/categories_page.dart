@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/common/custom_app_bar/custom_app_bar.dart';
 import 'package:flutter_application_2/common/image/custom_image.dart';
 import 'package:flutter_application_2/core/color/app_color.dart';
 import 'package:flutter_application_2/di/di.dart';
@@ -29,21 +30,8 @@ class _CategoriesPageState extends State<CategoriesPage> {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Categories",
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-            color: AppColors.redPink,
-          ),
-        ),
-        centerTitle: true,
-        actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.notifications)),
-          IconButton(onPressed: () {}, icon: Icon(Icons.search)),
-        ],
-      ),
+      appBar: CustomAppBar(title: 'Categories', centerTitle: true),
+
       body: SafeArea(
         bottom: false,
         child: Padding(
@@ -58,12 +46,17 @@ class _CategoriesPageState extends State<CategoriesPage> {
                 return Column(
                   children: [
                     if (state.first != null) ...[
-                      Text(state.first?.strCategory ?? "", style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),),
+                      Text(
+                        state.first?.strCategory ?? "",
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
                       ClipRRect(
                         borderRadius: .circular(18),
                         child: Image.network(
-                          state.first?.strCategoryThumb ??
-                              "",
+                          state.first?.strCategoryThumb ?? "",
                           height: 150,
                           fit: .fill,
                         ),
@@ -83,7 +76,10 @@ class _CategoriesPageState extends State<CategoriesPage> {
                       ),
                       itemBuilder: (BuildContext context, int index) {
                         return CustomImage(
-                          state.categories?.categories[index].strCategoryThumb ??
+                          state
+                                  .categories
+                                  ?.categories[index]
+                                  .strCategoryThumb ??
                               "",
                           label:
                               state.categories?.categories[index].strCategory ??
