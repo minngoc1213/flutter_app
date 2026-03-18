@@ -29,23 +29,26 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             )
           : SizedBox(
               height: 80,
-              child: Column(
-                crossAxisAlignment: .start,
-                mainAxisAlignment: .center,
-                children: [
-                  Text(
-                    greeting ?? "",
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.w400,
-                      color: AppColors.redPink,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25),
+                child: Column(
+                  crossAxisAlignment: .start,
+                  mainAxisAlignment: .center,
+                  children: [
+                    Text(
+                      greeting ?? "",
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.w400,
+                        color: AppColors.redPink,
+                      ),
                     ),
-                  ),
-                  Text(
-                    subtitle ?? '',
-                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400),
-                  ),
-                ],
+                    Text(
+                      subtitle ?? '',
+                      style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400),
+                    ),
+                  ],
+                ),
               ),
             ),
       actions: [

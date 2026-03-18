@@ -3,10 +3,19 @@ import 'package:flutter_application_2/core/color/app_color.dart';
 import 'package:flutter_application_2/router/app_router.dart';
 import 'package:go_router/go_router.dart';
 
-class OnBoardingScreen extends StatelessWidget {
+class OnBoardingScreen extends StatefulWidget {
   OnBoardingScreen({super.key});
+
+  @override
+  State<OnBoardingScreen> createState() => _OnBoardingScreenState();
+}
+
+class _OnBoardingScreenState extends State<OnBoardingScreen> {
   final String backgroundDir1 = 'assets/png/onboarding1.png';
+
   final String backgroundDir2 = 'assets/png/onboarding2.png';
+
+  int index = 0;
 
   final PageController _pageController = .new();
 
@@ -15,7 +24,20 @@ class OnBoardingScreen extends StatelessWidget {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        
+        title: (index != 0)
+            ? IconButton(
+                onPressed: () {
+                  index--;
+                  _pageController.animateToPage(
+                    index,
+                    duration: Duration(milliseconds: 300),
+                    curve: Curves.ease,
+                  );
+                  setState(() {});
+                },
+                icon: Icon(Icons.arrow_back),
+              )
+            : SizedBox(),
       ),
       body: PageView(
         physics: NeverScrollableScrollPhysics(),
@@ -28,16 +50,20 @@ class OnBoardingScreen extends StatelessWidget {
   Widget firstPage(Size size) {
     return Column(
       children: [
-        Container(
-          child: Column(
-            crossAxisAlignment: .start,
-            children: [
-              Text("Get inspired", style: TextStyle(fontSize: 20, fontWeight: .w600),),
-              Text("Get inspired with our daily recipe recommendations.", style: TextStyle(fontSize: 13, fontWeight: .w400),),
-            ],
-          ),
+        Column(
+          crossAxisAlignment: .start,
+          children: [
+            Text(
+              "Get inspired",
+              style: TextStyle(fontSize: 20, fontWeight: .w600),
+            ),
+            Text(
+              "Get inspired with our daily recipe recommendations.",
+              style: TextStyle(fontSize: 13, fontWeight: .w400),
+            ),
+          ],
         ),
-        SizedBox(height: 44,),
+        SizedBox(height: 44),
         Expanded(
           child: Container(
             decoration: BoxDecoration(
@@ -49,7 +75,7 @@ class OnBoardingScreen extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  height: 284,
+                  height: size.height * 0.3,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [Colors.white, Colors.transparent],
@@ -74,14 +100,29 @@ class OnBoardingScreen extends StatelessWidget {
                     ),
                     ElevatedButton(
                       onPressed: () {
+                        index++;
                         _pageController.animateToPage(
-                          1,
+                          index,
                           duration: Duration(milliseconds: 300),
                           curve: Curves.ease,
                         );
+                        setState(() {});
                       },
-                      style: ElevatedButton.styleFrom(backgroundColor: AppColors.pink, padding: EdgeInsets.symmetric(horizontal: 56, vertical: 7)),
-                      child: Text("Continue", style: TextStyle(fontSize: 20, fontWeight: .w600, color: AppColors.sweetPink),),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.pink,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 56,
+                          vertical: 7,
+                        ),
+                      ),
+                      child: Text(
+                        "Continue",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: .w600,
+                          color: AppColors.sweetPink,
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -96,26 +137,20 @@ class OnBoardingScreen extends StatelessWidget {
   Widget secondPage(Size size) {
     return Column(
       children: [
-        Container(
-          child: Column(
-            crossAxisAlignment: .start,
-            children: [
-              // IconButton(
-              //   onPressed: () {
-              //     _pageController.animateToPage(
-              //       0,
-              //       duration: Duration(milliseconds: 300),
-              //       curve: Curves.ease,
-              //     );
-              //   },
-              //   icon: Icon(Icons.arrow_back),
-              // ),
-              Text("Get an increase your skills", style: TextStyle(fontSize: 20, fontWeight: .w600),),
-              Text("Learn essential cooking techniques at your own pace.", style: TextStyle(fontSize: 13, fontWeight: .w400),),
-            ],
-          ),
+        Column(
+          crossAxisAlignment: .start,
+          children: [
+            Text(
+              "Get an increase your skills",
+              style: TextStyle(fontSize: 20, fontWeight: .w600),
+            ),
+            Text(
+              "Learn essential cooking techniques at your own pace.",
+              style: TextStyle(fontSize: 13, fontWeight: .w400),
+            ),
+          ],
         ),
-        SizedBox(height: 44,),
+        SizedBox(height: 44),
         Expanded(
           child: Container(
             decoration: BoxDecoration(
@@ -152,13 +187,29 @@ class OnBoardingScreen extends StatelessWidget {
                     ),
                     ElevatedButton(
                       onPressed: () {
+                        index++;
                         _pageController.animateToPage(
-                          2,
+                          index,
                           duration: Duration(milliseconds: 300),
                           curve: Curves.ease,
                         );
+                        setState(() {});
                       },
-                      child: Text("Continue"),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.pink,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 56,
+                          vertical: 7,
+                        ),
+                      ),
+                      child: Text(
+                        "Continue",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: .w600,
+                          color: AppColors.sweetPink,
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -171,55 +222,80 @@ class OnBoardingScreen extends StatelessWidget {
   }
 
   Widget thirdPage(Size size, BuildContext context) {
-    return Column(
-      children: [
-        IconButton(
-          onPressed: () {
-            _pageController.animateToPage(
-              1,
-              duration: Duration(milliseconds: 300),
-              curve: Curves.ease,
-            );
-          },
-          icon: Icon(Icons.arrow_back),
-        ),
-        GridView.builder(
-          physics: NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          itemCount: 6,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            crossAxisSpacing: 4.0,
-            mainAxisSpacing: 4.0,
-            childAspectRatio: 1.5,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 36),
+      child: Column(
+        children: [
+          GridView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: 6,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 27,
+              mainAxisSpacing: 27,
+              childAspectRatio: 1,
+            ),
+            itemBuilder: (BuildContext context, int index) {
+              return Image(
+                image: AssetImage("assets/png/onboarding3_$index.png"),
+                width: 166,
+                height: 166,
+                fit: .cover,
+              );
+            },
           ),
-          itemBuilder: (BuildContext context, int index) {
-            return Image(
-              image: AssetImage("assets/png/onboarding3_$index.png"),
-            );
-          },
-        ),
-        Text("Welcome"),
-        Text(
-          "Find the best recipes that the world can provide you also with every step that you can learn to increase your cooking skills.",
-        ),
-        ElevatedButton(
-          onPressed: () {
-            _pageController.animateToPage(
-              2,
-              duration: Duration(milliseconds: 300),
-              curve: Curves.ease,
-            );
-          },
-          child: Text("I'm New"),
-        ),
-        ElevatedButton(
-          onPressed: () {
-            context.go(AppRouteName.loginScreen);
-          },
-          child: Text("I've Been Here"),
-        ),
-      ],
+          Text("Welcome", style: TextStyle(fontSize: 25, fontWeight: .w600)),
+          Text(
+            "Find the best recipes that the world can provide you also with every step that you can learn to increase your cooking skills.",
+            style: TextStyle(fontSize: 13, fontWeight: .w400),
+            textAlign: .center,
+            maxLines: 3,
+          ),
+          SizedBox(height: 28,),
+          SizedBox(
+            width: 207,
+            child: ElevatedButton(
+              onPressed: () {
+                context.go(AppRouteName.registerScreen);
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.pink,
+                padding: EdgeInsets.symmetric(vertical: 7),
+              ),
+              child: Text(
+                "I'm New",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: .w600,
+                  color: AppColors.sweetPink,
+                ),
+              ),
+            ),
+          ),
+          SizedBox(height: 20,),
+          SizedBox(
+            width: 207,
+            child: ElevatedButton(
+              onPressed: () {
+                context.go(AppRouteName.loginScreen);
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.pink,
+                padding: EdgeInsets.symmetric(vertical: 7),
+              ),
+              child: Text(
+                "I've Been Here",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: .w600,
+                  color: AppColors.sweetPink,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -7,11 +7,11 @@ class CustomElevatedButton extends StatelessWidget {
     this.backgroundColor = AppColors.pink,
     this.fontSize = 20,
     this.fontWeight = FontWeight.w600,
-    this.horizontalPadding = 74,
+    this.horizontalPadding = 58,
     this.onPressed,
     this.text = '',
     this.textColor = AppColors.sweetPink,
-    this.verticalPadding = 15,
+    this.verticalPadding = 12,
   });
 
   final Color? backgroundColor;
