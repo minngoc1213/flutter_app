@@ -23,147 +23,297 @@ class HomePage extends StatelessWidget {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: 36),
           child: Column(
             crossAxisAlignment: .start,
+            spacing: 19,
             children: [
-              Text(
-                "Hi! Diane",
-                style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.w400,
-                  color: AppColors.redPink,
-                ),
-              ),
-              Text(
-                "What are you cooking today",
-                style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400),
-              ),
-              SizedBox(
-                height: 40,
-                child: ListView.separated(
-                  itemCount: categories.length,
-                  scrollDirection: .horizontal,
-                  separatorBuilder: (context, index) {
-                    return SizedBox(width: 19);
-                  },
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 9,
-                          vertical: 5,
-                        ),
-                        alignment: .center,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(18),
-                          color: AppColors.transparent,
-                        ),
-                        child: Text(
-                          categories[index],
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                            color: AppColors.redPink,
-                          ),
-                        ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 36),
+                child: Column(
+                  crossAxisAlignment: .start,
+                  children: [
+                    Text(
+                      "Hi! Diane",
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.w400,
+                        color: AppColors.redPink,
                       ),
-                    );
-                  },
-                ),
-              ),
-              Text(
-                "Trending Recipe",
-                style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500,
-                  color: AppColors.redPink,
-                ),
-              ),
-              Stack(
-                children: [
-                  Container(
-                    height: 200,
-                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 7),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      border: .all(color: AppColors.sweetPink),
                     ),
-                    child: Column(
-                      mainAxisAlignment: .end,
-                      // crossAxisAlignment: .start,
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              "Salami and cheese pizza",
-                            ),
-                            Spacer(),
-                            Icon(Icons.timer, color: AppColors.sweetPink),
-                            Text(
-                              "30 min",
-                              style: TextStyle(color: AppColors.sweetPink),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: .spaceBetween,
-                          children: [
-                            Expanded(
+                    Text(
+                      "What are you cooking today",
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    SizedBox(height: 19,),
+                    SizedBox(
+                      height: 40,
+                      child: ListView.separated(
+                        itemCount: categories.length,
+                        scrollDirection: .horizontal,
+                        separatorBuilder: (context, index) {
+                          return SizedBox(width: 19);
+                        },
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                            onTap: () {},
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 9,
+                                vertical: 5,
+                              ),
+                              alignment: .center,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(18),
+                                color: AppColors.transparent,
+                              ),
                               child: Text(
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                "This is a quick overview of the ingredients...",
+                                categories[index],
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,
+                                  color: AppColors.redPink,
+                                ),
                               ),
                             ),
+                          );
+                        },
+                      ),
+                    ),
+                    SizedBox(height: 19,),
+                    Text(
+                      "Trending Recipe",
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.redPink,
+                      ),
+                    ),
+                    SizedBox(height: 10,),
+                    Stack(
+                      children: [
+                        Container(
+                          height: 200,
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 15,
+                            vertical: 7,
+                          ),
+                          margin: EdgeInsets.symmetric(horizontal: 10),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            border: .all(color: AppColors.sweetPink),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: .end,
+                            // crossAxisAlignment: .start,
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    "Salami and cheese pizza",
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                  Spacer(),
+                                  Icon(Icons.timer, color: AppColors.sweetPink),
+                                  Text(
+                                    "30 min",
+                                    style: TextStyle(
+                                      color: AppColors.sweetPink,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: .spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      "This is a quick overview of the ingredients...",
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w300,
+                                      ),
+                                    ),
+                                  ),
 
-                            Text(
-                              "5",
-                              style: TextStyle(color: AppColors.sweetPink),
+                                  Text(
+                                    "5",
+                                    style: TextStyle(
+                                      color: AppColors.sweetPink,
+                                    ),
+                                  ),
+                                  Icon(Icons.star, color: AppColors.sweetPink),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        ClipRRect(
+                          borderRadius: .circular(15),
+                          child: SizedBox(
+                            height: 143,
+                            width: size.width,
+                            child: Image.network(
+                              "https://www.themealdb.com/images/category/goat.png",
+                              fit: .fitWidth,
+                              height: 169,
                             ),
-                            Icon(Icons.star, color: AppColors.sweetPink),
-                          ],
+                          ),
                         ),
                       ],
                     ),
+                  ],
+                ),
+              ),
+              Card(
+                color: AppColors.redPink,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 38,
+                    vertical: 14,
                   ),
-                  ClipRRect(
-                    borderRadius: .circular(15),
-                    child: SizedBox(
-                      height: 143,
-                      width: size.width,
-                      child: Image.network(
-                        "https://www.themealdb.com/images/category/goat.png",
-                        fit: .fitWidth,
-                        height: 169,
+                  child: Column(
+                    crossAxisAlignment: .start,
+                    spacing: 9,
+                    children: [
+                      Text(
+                        "Your Recipes",
+                        style: TextStyle(
+                          color: AppColors.white,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 190,
+                        width: size.width,
+                        child: ListView.separated(
+                          itemCount: 4,
+                          scrollDirection: Axis.horizontal,
+                          shrinkWrap: true,
+                          separatorBuilder: (context, index) =>
+                              SizedBox(width: 25),
+                          itemBuilder: (context, index) {
+                            return Stack(
+                              alignment: .bottomCenter,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: .circular(18),
+                                  child: Container(
+                                    height: 190,
+                                    width: 162,
+                                    alignment: .topCenter,
+                                    child: Image.network(
+                                      "https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg",
+                                      fit: .fitWidth,
+                                      // height: 200,
+                                      // width: 162,
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(18),
+                                    color: AppColors.white,
+                                  ),
+                                  padding: EdgeInsets.symmetric(horizontal: 15),
+                                  width: 162,
+                                  height: 45,
+                                  child: Column(
+                                    mainAxisAlignment: .end,
+                                    crossAxisAlignment: .start,
+                                    children: [
+                                      Text("Tiramisu\n", maxLines: 1),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            "5",
+                                            style: TextStyle(
+                                              color: AppColors.sweetPink,
+                                            ),
+                                          ),
+                                          Icon(
+                                            Icons.star,
+                                            color: AppColors.sweetPink,
+                                          ),
+                                          Spacer(),
+                                          Icon(
+                                            Icons.timer,
+                                            color: AppColors.sweetPink,
+                                          ),
+                                          Text(
+                                            "15 min",
+                                            style: TextStyle(
+                                              color: AppColors.sweetPink,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 36),
+                child: Column(
+                  crossAxisAlignment: .start,
+                  children: [
+                    Text(
+                      "Top Chef",
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.redPink,
                       ),
                     ),
-                  ),
-                ],
+                    SizedBox(height: 10,),
+                    SizedBox(
+                      height: 190,
+                      width: size.width,
+                      child: ListView.separated(
+                        itemCount: 4,
+                        scrollDirection: Axis.horizontal,
+                        shrinkWrap: true,
+                        separatorBuilder: (context, index) =>
+                            SizedBox(width: 25),
+                        itemBuilder: (context, index) {
+                          return Column(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadiusGeometry.circular(8),
+                                child: Image.network(
+                                  "https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg",
+                                  fit: .cover,
+                                  height: 74,
+                                  width: 82,
+                                ),
+                              ),
+                              Text("Andrew"),
+                            ],
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              // Card(
-              //   color: AppColors.redPink,
-              //   child: Column(
-              //     mainAxisSize: MainAxisSize.min,
-              //     children: [
-              //       Text("Your Recipes"),
-              //       // SizedBox(
-              //       //   height: 130,
-              //       //   child: ListView.builder(
-              //       //     itemCount: 3,
-              //       //     scrollDirection: Axis.horizontal,
-
-              //       //     itemBuilder: (context, index) {
-              //       //       return CustomImage("https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg", label: "Tiramisu",);
-              //       //     },
-              //       //   ),
-              //       // ),
-              //     ],
-              //   ),
-              // ),
             ],
           ),
         ),
