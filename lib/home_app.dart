@@ -5,7 +5,7 @@ import 'package:flutter_application_2/core/color/app_color.dart';
 import 'package:flutter_application_2/features/categories/presentation/pages/categories_provider.dart';
 import 'package:flutter_application_2/features/home/presentation/home_page.dart';
 import 'package:flutter_application_2/features/messenger/presentation/messenger_page.dart';
-import 'package:flutter_application_2/features/profile/presentation/profile_page.dart';
+import 'package:flutter_application_2/features/profile/presentation/pages/profile_page.dart';
 
 class HomeApp extends StatefulWidget {
   const HomeApp({super.key});
