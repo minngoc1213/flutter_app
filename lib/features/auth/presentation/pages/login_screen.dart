@@ -47,84 +47,78 @@ class LoginScreen extends StatelessWidget {
             ).showSnackBar(SnackBar(content: Text("Log In failed")));
           }
         },
-        child: SafeArea(
-          child: SizedBox(
-            height: size.height,
-            width: size.width,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 36),
-              child: Column(
-                crossAxisAlignment: .center,
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 36),
+          child: Column(
+            crossAxisAlignment: .center,
+            children: [
+              SizedBox(height: 76,),
+              CustomTextField(
+                controller: _emailController,
+                label: 'Email',
+              ),
+              SizedBox(height: 9,),
+              CustomPasswordField(
+                controller: _passWordController,
+                label: 'Password',
+              ),
+              SizedBox(height: 89),
+              SizedBox(
+                width: 207,
+                child: CustomElevatedButton(
+                  text: "Log In",
+                  onPressed: () {
+                    authBloc.add(
+                      LoginEvent(
+                        email: _emailController.text,
+                        password: _passWordController.text,
+                      ),
+                    );
+                  },
+                ),
+              ),
+              SizedBox(height: 27),
+              SizedBox(
+                width: 207,
+                child: CustomElevatedButton(
+                  text: "Sign Up",
+                  onPressed: () {
+                    context.go(AppRouteName.registerScreen);
+                  },
+                ),
+              ),
+              SizedBox(height: 58),
+              TextButton(
+                onPressed: () {
+                  context.go(AppRouteName.loginScreen);
+                },
+                child: Text("Forgot Password?", style: TextStyle(fontSize: 14, fontWeight: .w600)),
+              ),
+              SizedBox(height: 58),
+              Text("or sign up with", style: TextStyle(fontSize: 13, fontWeight: .w300)),
+              SizedBox(height: 24),
+              Row(
+                mainAxisSize: .min,
+                spacing: 13.96,
+                children: List.generate(4, (index) {
+                  return SvgPicture.asset("assets/svg/login$index.svg");
+                }),
+              ),
+              SizedBox(height: 24),
+              Row(
+                mainAxisSize: .min,
                 children: [
-                  Spacer(),
-                  CustomTextField(
-                    controller: _emailController,
-                    label: 'Email',
-                  ),
-                  SizedBox(height: 9,),
-                  CustomPasswordField(
-                    controller: _passWordController,
-                    label: 'Password',
-                  ),
-                  SizedBox(height: 89),
-                  SizedBox(
-                    width: 207,
-                    child: CustomElevatedButton(
-                      text: "Log In",
-                      onPressed: () {
-                        authBloc.add(
-                          LoginEvent(
-                            email: _emailController.text,
-                            password: _passWordController.text,
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                  SizedBox(height: 27),
-                  SizedBox(
-                    width: 207,
-                    child: CustomElevatedButton(
-                      text: "Sign Up",
-                      onPressed: () {
-                        context.go(AppRouteName.registerScreen);
-                      },
-                    ),
-                  ),
-                  SizedBox(height: 58),
+                  Text("Don’t have an account?", style: TextStyle(fontSize: 13, fontWeight: .w300),),
                   TextButton(
                     onPressed: () {
-                      context.go(AppRouteName.loginScreen);
+                      context.go(AppRouteName.registerScreen);
                     },
-                    child: Text("Forgot Password?", style: TextStyle(fontSize: 14, fontWeight: .w600)),
+                    child: Text("Sign Up", style: TextStyle(fontSize: 13, fontWeight: .w300, color: AppColors.sweetPink)),
                   ),
-                  SizedBox(height: 58),
-                  Text("or sign up with", style: TextStyle(fontSize: 13, fontWeight: .w300)),
-                  SizedBox(height: 24),
-                  Row(
-                    mainAxisSize: .min,
-                    spacing: 13.96,
-                    children: List.generate(4, (index) {
-                      return SvgPicture.asset("assets/svg/login$index.svg");
-                    }),
-                  ),
-                  SizedBox(height: 24),
-                  Row(
-                    mainAxisSize: .min,
-                    children: [
-                      Text("Don’t have an account?", style: TextStyle(fontSize: 13, fontWeight: .w300),),
-                      TextButton(
-                        onPressed: () {
-                          context.go(AppRouteName.registerScreen);
-                        },
-                        child: Text("Sign Up", style: TextStyle(fontSize: 13, fontWeight: .w300, color: AppColors.sweetPink)),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 70),
                 ],
               ),
-            ),
+              SizedBox(height: 70),
+            ],
           ),
         ),
       ),

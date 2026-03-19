@@ -222,7 +222,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   }
 
   Widget thirdPage(Size size, BuildContext context) {
-    return Padding(
+    return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(horizontal: 36),
       child: Column(
         children: [

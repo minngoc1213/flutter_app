@@ -1,16 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/common/custom_app_bar/custom_app_bar.dart';
 import 'package:flutter_application_2/core/color/app_color.dart';
+import 'package:flutter_application_2/di/di.dart';
+import 'package:flutter_application_2/features/categories/presentation/argument/category_argument.dart';
+import 'package:flutter_application_2/features/categories/presentation/bloc/categories_bloc.dart';
+import 'package:flutter_application_2/features/categories/presentation/bloc/categories_event.dart';
+import 'package:flutter_application_2/features/categories/presentation/bloc/categories_state.dart';
+import 'package:flutter_application_2/router/app_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   HomePage({super.key});
-  List<String> categories = [
-    "Breakfast",
-    "Lunch",
-    "Dinner",
-    "Vegan",
-    "Starter",
-  ];
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final CategoriesBloc categoriesBloc = sl.get();
+  @override
+  void initState() {
+    super.initState();
+    categoriesBloc.add(GetCategoriesEvent());
+  }
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -32,39 +46,46 @@ class HomePage extends StatelessWidget {
                   crossAxisAlignment: .start,
                   children: [
                     SizedBox(height: 19),
-                    SizedBox(
-                      height: 40,
-                      child: ListView.separated(
-                        itemCount: categories.length,
-                        scrollDirection: .horizontal,
-                        separatorBuilder: (context, index) {
-                          return SizedBox(width: 19);
-                        },
-                        itemBuilder: (context, index) {
-                          return GestureDetector(
-                            onTap: () {},
-                            child: Container(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 9,
-                                vertical: 5,
-                              ),
-                              alignment: .center,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(18),
-                                color: AppColors.transparent,
-                              ),
-                              child: Text(
-                                categories[index],
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w400,
-                                  color: AppColors.redPink,
+                    BlocBuilder<CategoriesBloc, CategoriesState>(
+                      bloc: categoriesBloc,
+                      builder: (context, state) {
+                        return SizedBox(
+                          height: 40,
+                          child: state.categories != null ? ListView.separated(
+                            itemCount: state.categories?.categories.length ?? 0,
+                            scrollDirection: .horizontal,
+                            separatorBuilder: (context, index) {
+                              return SizedBox(width: 19);
+                            },
+                            itemBuilder: (context, index) {
+                              return GestureDetector(
+                                onTap: () {
+                                  context.push(AppRouteName.categoryDetailScreen, extra: CategoryArgument(category: state.categories?.categories[index].strCategory ?? "", categories: state.categories?.categories ?? []));
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 9,
+                                    vertical: 5,
+                                  ),
+                                  alignment: .center,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(18),
+                                    color: AppColors.transparent,
+                                  ),
+                                  child: Text(
+                                    state.categories?.categories[index].strCategory ?? "",
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400,
+                                      color: AppColors.redPink,
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
+                              );
+                            },
+                          ) : SizedBox()
+                        );
+                      },
                     ),
                     SizedBox(height: 19),
                     Text(
