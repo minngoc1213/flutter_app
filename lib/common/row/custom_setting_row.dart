@@ -7,24 +7,32 @@ class CustomSettingRow extends StatelessWidget {
     this.label = "",
     this.preIcon = const Icon(Icons.settings),
     this.hasPostIcon = true,
+    this.callback,
   });
   final String label;
   final Icon preIcon;
   final bool hasPostIcon;
+  final VoidCallback? callback;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        preIcon,
-        SizedBox(width: 10),
-        Text(
-          label,
-          style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
-        ),
-        Spacer(),
-        if (hasPostIcon) Icon(Icons.arrow_right, size: 35, color: AppColors.redPink,),
-      ],
+    return GestureDetector(
+      onTap: () {
+        callback?.call();
+      },
+      child: Row(
+        children: [
+          preIcon,
+          SizedBox(width: 10),
+          Text(
+            label,
+            style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+          ),
+          Spacer(),
+          if (hasPostIcon)
+            Icon(Icons.arrow_right, size: 35, color: AppColors.redPink),
+        ],
+      ),
     );
   }
 }

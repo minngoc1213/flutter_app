@@ -35,6 +35,7 @@ import '../features/categories/presentation/bloc/category_details_bloc.dart'
     as _i970;
 import '../features/categories/presentation/bloc/meal_details_bloc.dart'
     as _i257;
+import '../features/profile/cubit/setting_cubit.dart' as _i730;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -46,6 +47,7 @@ extension GetItInjectableX on _i174.GetIt {
     final appNetworkModule = _$AppNetworkModule();
     gh.singleton<_i361.Dio>(() => appNetworkModule.provideDio());
     gh.singleton<_i59.AuthBloc>(() => _i59.AuthBloc());
+    gh.singleton<_i730.SettingCubit>(() => _i730.SettingCubit());
     gh.singleton<_i1068.CategoryDataSource>(
       () => appNetworkModule.getCategoryDataSource(gh<_i361.Dio>()),
     );

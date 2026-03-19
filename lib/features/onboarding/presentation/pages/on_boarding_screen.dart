@@ -4,7 +4,7 @@ import 'package:flutter_application_2/router/app_router.dart';
 import 'package:go_router/go_router.dart';
 
 class OnBoardingScreen extends StatefulWidget {
-  OnBoardingScreen({super.key});
+  const OnBoardingScreen({super.key});
 
   @override
   State<OnBoardingScreen> createState() => _OnBoardingScreenState();
@@ -24,6 +24,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
+        centerTitle: false,
         title: (index != 0)
             ? IconButton(
                 onPressed: () {
@@ -252,7 +253,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             textAlign: .center,
             maxLines: 3,
           ),
-          SizedBox(height: 28,),
+          SizedBox(height: 28),
           SizedBox(
             width: 207,
             child: ElevatedButton(
@@ -273,7 +274,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               ),
             ),
           ),
-          SizedBox(height: 20,),
+          SizedBox(height: 20),
           SizedBox(
             width: 207,
             child: ElevatedButton(

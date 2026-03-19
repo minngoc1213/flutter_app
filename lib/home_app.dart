@@ -21,7 +21,7 @@ class _HomeAppState extends State<HomeApp> {
     HomeProvider(),
     MessengerPage(),
     CategoriesProvider(),
-    ProfilePage(),
+    ProfilePageProvider(),
   ];
   @override
   Widget build(BuildContext context) {
