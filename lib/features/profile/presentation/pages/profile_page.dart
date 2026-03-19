@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/common/row/custom_setting_row.dart';
 import 'package:flutter_application_2/core/color/app_color.dart';
+import 'package:flutter_application_2/core/local_state/shared_preferences.dart';
 import 'package:flutter_application_2/di/di.dart';
 import 'package:flutter_application_2/features/profile/cubit/setting_cubit.dart';
+import 'package:flutter_application_2/router/app_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class ProfilePageProvider extends StatelessWidget {
   const ProfilePageProvider({super.key});
@@ -81,6 +84,10 @@ class _ProfilePage extends StatelessWidget {
               hasPostIcon: false,
             ),
             CustomSettingRow(
+              callback: () {
+                AppPrefs().setIsLogged(false);
+                context.go(AppRouteName.loginScreen);
+              },
               label: "Log Out",
               preIcon: Icon(Icons.logout, size: 35, color: AppColors.redPink),
               hasPostIcon: false,

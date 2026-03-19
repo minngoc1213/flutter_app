@@ -169,12 +169,15 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
 
                           const SizedBox(height: 25),
                           Row(
+                            mainAxisAlignment: .spaceBetween,
                             children: [
                               const Image(
                                 image: AssetImage("assets/png/avatar.png"),
                               ),
+                              SizedBox(width: 5,),
                               Expanded(
                                 child: Column(
+                                  crossAxisAlignment: .start,
                                   children: const [
                                     Text("@josh-ryan"),
                                     Text("Josh Ryan-Chef"),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/core/color/app_color.dart';
+import 'package:flutter_application_2/core/local_state/shared_preferences.dart';
+import 'package:flutter_application_2/home_app.dart';
 import 'package:flutter_application_2/router/app_router.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
@@ -20,6 +22,10 @@ class _LauncherScreenState extends State<LauncherScreen> {
 
   Future<void> changeScreen() async {
     await Future.delayed(Duration(seconds: 2));
+    if (AppPrefs().getIsLogged() ?? false) {
+      context.go(AppRouteName.homeScreen);
+      return;
+    }
     context.go(AppRouteName.onboardingScreen);
   }
 

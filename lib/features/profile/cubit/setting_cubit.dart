@@ -18,7 +18,9 @@ class SettingCubit extends Cubit<SettingState> {
 
   Future<void> initData() async {
     final isDark = AppPrefs().getIsDark();
+    final isLogged = AppPrefs().getIsLogged();
     emit(state.copyWith(isDark: isDark ?? false));
     print("GET isDark: $isDark");
+    print("GET isLogged: $isLogged");
   }
 }

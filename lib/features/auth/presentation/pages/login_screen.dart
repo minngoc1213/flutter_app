@@ -3,6 +3,7 @@ import 'package:flutter_application_2/common/elevated_button/custom_elevated_but
 import 'package:flutter_application_2/common/text_field/custom_password_field.dart';
 import 'package:flutter_application_2/common/text_field/custom_text_field.dart';
 import 'package:flutter_application_2/core/color/app_color.dart';
+import 'package:flutter_application_2/core/local_state/shared_preferences.dart';
 import 'package:flutter_application_2/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:flutter_application_2/features/auth/presentation/bloc/auth_event.dart';
 import 'package:flutter_application_2/features/auth/presentation/bloc/auth_state.dart';
@@ -35,6 +36,7 @@ class LoginScreen extends StatelessWidget {
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state.status == .success) {
+            AppPrefs().setIsLogged(true);
             final controller = ScaffoldMessenger.of(
               context,
             ).showSnackBar(SnackBar(content: Text("Log In success")));

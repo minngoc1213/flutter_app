@@ -179,7 +179,6 @@ class RegisterScreen extends StatelessWidget {
       builder: (context) {
         return Dialog(
           alignment: .center,
-          backgroundColor: AppColors.white,
           child: Container(
             width: .minPositive,
             padding: EdgeInsets.symmetric(horizontal: 36, vertical: 23),

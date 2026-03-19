@@ -22,12 +22,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final CategoriesBloc categoriesBloc = sl.get();
-  final MealDetailsBloc mealDetailsBloc = sl.get();
+  final MealDetailsBloc trendingMealBloc = sl.get();
+  final MealDetailsBloc yourMealBloc = sl.get();
   @override
   void initState() {
     super.initState();
     categoriesBloc.add(GetCategoriesEvent());
-    mealDetailsBloc.add(GetRandomMealEvent());
+    trendingMealBloc.add(GetRandomMealEvent());
+    yourMealBloc.add(GetRandomMealEvent());
   }
 
   @override
@@ -116,7 +118,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     SizedBox(height: 19),
                     BlocBuilder<MealDetailsBloc, MealDetailsState>(
-                      bloc: mealDetailsBloc,
+                      bloc: trendingMealBloc,
                       builder: (context, state) {
                         if (state.meals == null) {
                           return Center(child: CircularProgressIndicator());
@@ -133,89 +135,107 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                             SizedBox(height: 10),
-                            Stack(
-                              children: [
-                                Container(
-                                  height: 205,
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: 15,
-                                    vertical: 7,
-                                  ),
-                                  margin: EdgeInsets.symmetric(horizontal: 10),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                    border: .all(color: AppColors.sweetPink),
-                                  ),
-                                  child: Column(
-                                    mainAxisAlignment: .end,
-                                    // crossAxisAlignment: .start,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Text(
-                                            state.meals?.meals[0].strMeal ?? "",
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                          ),
-                                          Spacer(),
-                                          Icon(
-                                            Icons.timer,
-                                            color: AppColors.sweetPink,
-                                          ),
-                                          Text(
-                                            "30 min",
-                                            style: TextStyle(
-                                              color: AppColors.sweetPink,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisAlignment: .spaceBetween,
-                                        children: [
-                                          Expanded(
-                                            child: Text(
-                                              state.meals?.meals[0].strInstructions ?? "",
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: TextStyle(
-                                                fontSize: 13,
-                                                fontWeight: FontWeight.w300,
+                            GestureDetector(
+                              onTap: () {
+                                context.push(
+                                  AppRouteName.mealDetailsScreen,
+                                  extra: state.meals?.meals[0].idMeal,
+                                );
+                              },
+                              child: Stack(
+                                children: [
+                                  Container(
+                                    height: 205,
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 15,
+                                      vertical: 7,
+                                    ),
+                                    margin: EdgeInsets.symmetric(
+                                      horizontal: 10,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                      border: .all(color: AppColors.sweetPink),
+                                    ),
+                                    child: Column(
+                                      mainAxisAlignment: .end,
+                                      // crossAxisAlignment: .start,
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment: .spaceBetween,
+                                          children: [
+                                            Expanded(
+                                              child: Text(
+                                                state.meals?.meals[0].strMeal ??
+                                                    "",
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                  fontSize: 13,
+                                                  fontWeight: FontWeight.w400,
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                          Text(
-                                            "5",
-                                            style: TextStyle(
+                                            Icon(
+                                              Icons.timer,
                                               color: AppColors.sweetPink,
                                             ),
-                                          ),
-                                          Icon(
-                                            Icons.star,
-                                            color: AppColors.sweetPink,
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                ClipRRect(
-                                  borderRadius: .circular(15),
-                                  child: SizedBox(
-                                    height: 143,
-                                    width: size.width,
-                                    child: Image.network(
-                                      state.meals?.meals[0].strMealThumb ?? "",
-                                      fit: .fitWidth,
-                                      height: 169,
+                                            Text(
+                                              "30 min",
+                                              style: TextStyle(
+                                                color: AppColors.sweetPink,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          mainAxisAlignment: .spaceBetween,
+                                          children: [
+                                            Expanded(
+                                              child: Text(
+                                                state
+                                                        .meals
+                                                        ?.meals[0]
+                                                        .strInstructions ??
+                                                    "",
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                  fontSize: 13,
+                                                  fontWeight: FontWeight.w300,
+                                                ),
+                                              ),
+                                            ),
+                                            Text(
+                                              "5",
+                                              style: TextStyle(
+                                                color: AppColors.sweetPink,
+                                              ),
+                                            ),
+                                            Icon(
+                                              Icons.star,
+                                              color: AppColors.sweetPink,
+                                            ),
+                                          ],
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                ),
-                              ],
+                                  ClipRRect(
+                                    borderRadius: .circular(15),
+                                    child: SizedBox(
+                                      height: 143,
+                                      width: size.width,
+                                      child: Image.network(
+                                        state.meals?.meals[0].strMealThumb ??
+                                            "",
+                                        fit: .fitWidth,
+                                        height: 169,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         );
@@ -224,101 +244,134 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
-              Card(
-                color: AppColors.redPink,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 38,
-                    vertical: 14,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: .start,
-                    spacing: 9,
-                    children: [
-                      Text(
-                        "Your Recipes",
-                        style: TextStyle(
-                          color: AppColors.white,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                        ),
+              BlocBuilder<MealDetailsBloc, MealDetailsState>(
+                bloc: yourMealBloc,
+                builder: (context, state) {
+                  return Card(
+                    color: AppColors.redPink,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 38,
+                        vertical: 14,
                       ),
-                      SizedBox(
-                        height: 190,
-                        width: size.width,
-                        child: ListView.separated(
-                          itemCount: 4,
-                          scrollDirection: Axis.horizontal,
-                          shrinkWrap: true,
-                          separatorBuilder: (context, index) =>
-                              SizedBox(width: 25),
-                          itemBuilder: (context, index) {
-                            return Stack(
-                              alignment: .bottomCenter,
-                              children: [
-                                ClipRRect(
-                                  borderRadius: .circular(18),
-                                  child: Container(
-                                    height: 190,
-                                    width: 162,
-                                    alignment: .topCenter,
-                                    child: Image.network(
-                                      "https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg",
-                                      fit: .fitWidth,
-                                      // height: 200,
-                                      // width: 162,
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(18),
-                                    color: AppColors.white,
-                                  ),
-                                  padding: EdgeInsets.symmetric(horizontal: 15),
-                                  width: 162,
-                                  height: 45,
-                                  child: Column(
-                                    mainAxisAlignment: .end,
-                                    crossAxisAlignment: .start,
-                                    children: [
-                                      Text("Tiramisu\n", maxLines: 1),
-                                      Row(
-                                        children: [
-                                          Text(
-                                            "5",
-                                            style: TextStyle(
-                                              color: AppColors.sweetPink,
+                      child: Column(
+                        crossAxisAlignment: .start,
+                        spacing: 9,
+                        children: [
+                          Text(
+                            "Your Recipes",
+                            style: TextStyle(
+                              color: AppColors.white,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 190,
+                            width: size.width,
+                            child: state.meals != null
+                                ? ListView.separated(
+                                    itemCount: 4,
+                                    scrollDirection: Axis.horizontal,
+                                    shrinkWrap: true,
+                                    separatorBuilder: (context, index) =>
+                                        SizedBox(width: 25),
+                                    itemBuilder: (context, index) {
+                                      return GestureDetector(
+                                        onTap: () {
+                                          context.push(
+                                            AppRouteName.mealDetailsScreen,
+                                            extra: state.meals?.meals[0].idMeal,
+                                          );
+                                        },
+                                        child: Stack(
+                                          alignment: .bottomCenter,
+                                          children: [
+                                            ClipRRect(
+                                              borderRadius: .circular(18),
+                                              child: Container(
+                                                height: 190,
+                                                width: 162,
+                                                alignment: .topCenter,
+                                                child: Image.network(
+                                                  state
+                                                          .meals
+                                                          ?.meals[0]
+                                                          .strMealThumb ??
+                                                      "",
+                                                  fit: .fitWidth,
+                                                  // height: 200,
+                                                  // width: 162,
+                                                ),
+                                              ),
                                             ),
-                                          ),
-                                          Icon(
-                                            Icons.star,
-                                            color: AppColors.sweetPink,
-                                          ),
-                                          Spacer(),
-                                          Icon(
-                                            Icons.timer,
-                                            color: AppColors.sweetPink,
-                                          ),
-                                          Text(
-                                            "15 min",
-                                            style: TextStyle(
-                                              color: AppColors.sweetPink,
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(18),
+                                                color: AppColors.white,
+                                              ),
+                                              padding: EdgeInsets.symmetric(
+                                                horizontal: 15,
+                                              ),
+                                              width: 162,
+                                              height: 45,
+                                              child: Column(
+                                                mainAxisAlignment: .end,
+                                                crossAxisAlignment: .start,
+                                                children: [
+                                                  Text(
+                                                    state
+                                                            .meals
+                                                            ?.meals[0]
+                                                            .strMeal ??
+                                                        "",
+                                                    maxLines: 1,
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      Text(
+                                                        "5",
+                                                        style: TextStyle(
+                                                          color: AppColors
+                                                              .sweetPink,
+                                                        ),
+                                                      ),
+                                                      Icon(
+                                                        Icons.star,
+                                                        color:
+                                                            AppColors.sweetPink,
+                                                      ),
+                                                      Spacer(),
+                                                      Icon(
+                                                        Icons.timer,
+                                                        color:
+                                                            AppColors.sweetPink,
+                                                      ),
+                                                      Text(
+                                                        "15 min",
+                                                        style: TextStyle(
+                                                          color: AppColors
+                                                              .sweetPink,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            );
-                          },
-                        ),
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                  )
+                                : Container(),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                ),
+                    ),
+                  );
+                },
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 36),

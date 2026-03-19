@@ -17,9 +17,17 @@ class AppPrefs {
     await _prefs?.setBool("isDark", value);
   }
 
+  Future setIsLogged(bool value) async {
+    await _prefs?.setBool("isLogged", value);
+  }
+
   // ===== GET =====
   bool? getIsDark() {
     return _prefs?.getBool("isDark");
+  }
+
+  bool? getIsLogged() {
+    return _prefs?.getBool("isLogged");
   }
 
 
