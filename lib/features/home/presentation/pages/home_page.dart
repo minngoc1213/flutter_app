@@ -6,6 +6,9 @@ import 'package:flutter_application_2/features/categories/presentation/argument/
 import 'package:flutter_application_2/features/categories/presentation/bloc/categories_bloc.dart';
 import 'package:flutter_application_2/features/categories/presentation/bloc/categories_event.dart';
 import 'package:flutter_application_2/features/categories/presentation/bloc/categories_state.dart';
+import 'package:flutter_application_2/features/categories/presentation/bloc/meal_details_bloc.dart';
+import 'package:flutter_application_2/features/categories/presentation/bloc/meal_details_event.dart';
+import 'package:flutter_application_2/features/categories/presentation/bloc/meal_details_state.dart';
 import 'package:flutter_application_2/router/app_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -19,10 +22,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final CategoriesBloc categoriesBloc = sl.get();
+  final MealDetailsBloc mealDetailsBloc = sl.get();
   @override
   void initState() {
     super.initState();
     categoriesBloc.add(GetCategoriesEvent());
+    mealDetailsBloc.add(GetRandomMealEvent());
   }
 
   @override
@@ -51,130 +56,170 @@ class _HomePageState extends State<HomePage> {
                       builder: (context, state) {
                         return SizedBox(
                           height: 40,
-                          child: state.categories != null ? ListView.separated(
-                            itemCount: state.categories?.categories.length ?? 0,
-                            scrollDirection: .horizontal,
-                            separatorBuilder: (context, index) {
-                              return SizedBox(width: 19);
-                            },
-                            itemBuilder: (context, index) {
-                              return GestureDetector(
-                                onTap: () {
-                                  context.push(AppRouteName.categoryDetailScreen, extra: CategoryArgument(category: state.categories?.categories[index].strCategory ?? "", categories: state.categories?.categories ?? []));
-                                },
-                                child: Container(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: 9,
-                                    vertical: 5,
-                                  ),
-                                  alignment: .center,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(18),
-                                    color: AppColors.transparent,
-                                  ),
-                                  child: Text(
-                                    state.categories?.categories[index].strCategory ?? "",
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w400,
-                                      color: AppColors.redPink,
-                                    ),
-                                  ),
-                                ),
-                              );
-                            },
-                          ) : SizedBox()
+                          child: state.categories != null
+                              ? ListView.separated(
+                                  itemCount:
+                                      state.categories?.categories.length ?? 0,
+                                  scrollDirection: .horizontal,
+                                  separatorBuilder: (context, index) {
+                                    return SizedBox(width: 19);
+                                  },
+                                  itemBuilder: (context, index) {
+                                    return GestureDetector(
+                                      onTap: () {
+                                        context.push(
+                                          AppRouteName.categoryDetailScreen,
+                                          extra: CategoryArgument(
+                                            category:
+                                                state
+                                                    .categories
+                                                    ?.categories[index]
+                                                    .strCategory ??
+                                                "",
+                                            categories:
+                                                state.categories?.categories ??
+                                                [],
+                                          ),
+                                        );
+                                      },
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 9,
+                                          vertical: 5,
+                                        ),
+                                        alignment: .center,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(
+                                            18,
+                                          ),
+                                          color: AppColors.transparent,
+                                        ),
+                                        child: Text(
+                                          state
+                                                  .categories
+                                                  ?.categories[index]
+                                                  .strCategory ??
+                                              "",
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400,
+                                            color: AppColors.redPink,
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                )
+                              : SizedBox(),
                         );
                       },
                     ),
                     SizedBox(height: 19),
-                    Text(
-                      "Trending Recipe",
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500,
-                        color: AppColors.redPink,
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                    Stack(
-                      children: [
-                        Container(
-                          height: 200,
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 15,
-                            vertical: 7,
-                          ),
-                          margin: EdgeInsets.symmetric(horizontal: 10),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            border: .all(color: AppColors.sweetPink),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: .end,
-                            // crossAxisAlignment: .start,
-                            children: [
-                              Row(
-                                children: [
-                                  Text(
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                    "Salami and cheese pizza",
-                                    style: TextStyle(
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                  Spacer(),
-                                  Icon(Icons.timer, color: AppColors.sweetPink),
-                                  Text(
-                                    "30 min",
-                                    style: TextStyle(
-                                      color: AppColors.sweetPink,
-                                    ),
-                                  ),
-                                ],
+                    BlocBuilder<MealDetailsBloc, MealDetailsState>(
+                      bloc: mealDetailsBloc,
+                      builder: (context, state) {
+                        if (state.meals == null) {
+                          return Center(child: CircularProgressIndicator());
+                        }
+                        return Column(
+                          crossAxisAlignment: .start,
+                          children: [
+                            Text(
+                              "Trending Recipe",
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: AppColors.redPink,
                               ),
-                              Row(
-                                mainAxisAlignment: .spaceBetween,
-                                children: [
-                                  Expanded(
-                                    child: Text(
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                      "This is a quick overview of the ingredients...",
-                                      style: TextStyle(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w300,
-                                      ),
-                                    ),
-                                  ),
-
-                                  Text(
-                                    "5",
-                                    style: TextStyle(
-                                      color: AppColors.sweetPink,
-                                    ),
-                                  ),
-                                  Icon(Icons.star, color: AppColors.sweetPink),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                        ClipRRect(
-                          borderRadius: .circular(15),
-                          child: SizedBox(
-                            height: 143,
-                            width: size.width,
-                            child: Image.network(
-                              "https://www.themealdb.com/images/category/goat.png",
-                              fit: .fitWidth,
-                              height: 169,
                             ),
-                          ),
-                        ),
-                      ],
+                            SizedBox(height: 10),
+                            Stack(
+                              children: [
+                                Container(
+                                  height: 205,
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 15,
+                                    vertical: 7,
+                                  ),
+                                  margin: EdgeInsets.symmetric(horizontal: 10),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                    border: .all(color: AppColors.sweetPink),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: .end,
+                                    // crossAxisAlignment: .start,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Text(
+                                            state.meals?.meals[0].strMeal ?? "",
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.w400,
+                                            ),
+                                          ),
+                                          Spacer(),
+                                          Icon(
+                                            Icons.timer,
+                                            color: AppColors.sweetPink,
+                                          ),
+                                          Text(
+                                            "30 min",
+                                            style: TextStyle(
+                                              color: AppColors.sweetPink,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        mainAxisAlignment: .spaceBetween,
+                                        children: [
+                                          Expanded(
+                                            child: Text(
+                                              state.meals?.meals[0].strInstructions ?? "",
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(
+                                                fontSize: 13,
+                                                fontWeight: FontWeight.w300,
+                                              ),
+                                            ),
+                                          ),
+                                          Text(
+                                            "5",
+                                            style: TextStyle(
+                                              color: AppColors.sweetPink,
+                                            ),
+                                          ),
+                                          Icon(
+                                            Icons.star,
+                                            color: AppColors.sweetPink,
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                ClipRRect(
+                                  borderRadius: .circular(15),
+                                  child: SizedBox(
+                                    height: 143,
+                                    width: size.width,
+                                    child: Image.network(
+                                      state.meals?.meals[0].strMealThumb ?? "",
+                                      fit: .fitWidth,
+                                      height: 169,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        );
+                      },
                     ),
                   ],
                 ),

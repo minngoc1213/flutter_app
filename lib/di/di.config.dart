@@ -28,6 +28,8 @@ import '../features/categories/domain/use_case/get_category_details_use_case.dar
     as _i473;
 import '../features/categories/domain/use_case/get_meal_details_use_case.dart'
     as _i959;
+import '../features/categories/domain/use_case/get_random_meal_use_case.dart'
+    as _i835;
 import '../features/categories/presentation/bloc/categories_bloc.dart' as _i105;
 import '../features/categories/presentation/bloc/category_details_bloc.dart'
     as _i970;
@@ -77,12 +79,20 @@ extension GetItInjectableX on _i174.GetIt {
         mealRepositoryImpl: gh<_i260.MealRepositoryImpl>(),
       ),
     );
-    gh.factory<_i257.MealDetailsBloc>(
-      () => _i257.MealDetailsBloc(gh<_i959.GetMealDetailsUseCase>()),
+    gh.factory<_i835.GetRandomMealUseCase>(
+      () => _i835.GetRandomMealUseCase(
+        mealRepositoryImpl: gh<_i260.MealRepositoryImpl>(),
+      ),
     );
     gh.factory<_i105.CategoriesBloc>(
       () => _i105.CategoriesBloc(
         getCategoriesUseCase: gh<_i396.GetCategoriesUseCase>(),
+      ),
+    );
+    gh.factory<_i257.MealDetailsBloc>(
+      () => _i257.MealDetailsBloc(
+        gh<_i959.GetMealDetailsUseCase>(),
+        gh<_i835.GetRandomMealUseCase>(),
       ),
     );
     return this;

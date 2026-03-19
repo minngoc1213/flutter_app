@@ -12,4 +12,6 @@ abstract class MealDataSource {
   @GET('/api/json/v1/1/lookup.php')
   Future<MealDetailData> getMealDetails(@Query('i') String id);
 
+  @GET('/api/json/v1/1/random.php')
+  Future<MealDetailData> getRandomMeal();
 }
