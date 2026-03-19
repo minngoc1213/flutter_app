@@ -30,32 +30,31 @@ class MessengerPage extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(
-                  height: 40, 
+                  height: 40,
                   child: Row(
+                    mainAxisAlignment: .spaceBetween,
                     children: categories.map((item) {
-                      return Expanded(
-                        child: GestureDetector(
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 9,
-                              vertical: 5,
-                            ),
-                            alignment: .center,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(18),
+                      return GestureDetector(
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 9,
+                            vertical: 5,
+                          ),
+                          alignment: .center,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(18),
+                            color: item == "Top Recipes"
+                                ? AppColors.redPink
+                                : AppColors.transparent,
+                          ),
+                          child: Text(
+                            item,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
                               color: item == "Top Recipes"
-                                  ? AppColors.redPink
-                                  : AppColors.transparent,
-                            ),
-                            child: Text(
-                              item,
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
-                                color: item == "Top Recipes"
-                                    ? AppColors.white
-                                    : AppColors.redPink,
-                              ),
+                                  ? AppColors.white
+                                  : AppColors.redPink,
                             ),
                           ),
                         ),
@@ -84,19 +83,32 @@ class MessengerPage extends StatelessWidget {
                               height: 35,
                               width: 35,
                             ),
-                            SizedBox(width: 15,),
+                            SizedBox(width: 15),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: .start,
                                 children: const [
-                                  Text("@josh-ryan", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),),
-                                  Text("2 years ago",style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400, color: AppColors.sweetPink)),
+                                  Text(
+                                    "@josh-ryan",
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                  Text(
+                                    "2 years ago",
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w400,
+                                      color: AppColors.sweetPink,
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
                           ],
                         ),
-                        SizedBox(height: 15,),
+                        SizedBox(height: 15),
                         ClipRRect(
                           borderRadius: .vertical(top: Radius.circular(18)),
                           child: Image.network(

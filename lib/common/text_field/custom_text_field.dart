@@ -15,6 +15,7 @@ class CustomTextField extends StatelessWidget {
     this.contentPaddingHorizontal = 25,
     this.contentPaddingVertical = 10,
     this.onTap,
+    this.height = 40,
   });
   final TextEditingController? controller;
   final Color? color;
@@ -27,7 +28,7 @@ class CustomTextField extends StatelessWidget {
   final double contentPaddingHorizontal;
   final double contentPaddingVertical;
   final Function()? onTap;
-
+  final double height;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -38,19 +39,25 @@ class CustomTextField extends StatelessWidget {
           style: TextStyle(fontSize: fontSize, fontWeight: fontWeight),
         ),
         SizedBox(height: 10),
-        TextField(
-          onTap: onTap,
-          controller: controller,
-          obscureText: obscureText,
-          decoration: InputDecoration(
-            filled: true,
-            fillColor: color,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(radius),
-              borderSide: BorderSide.none,
+        SizedBox(
+          height: height,
+          child: TextField(
+            onTap: onTap,
+            controller: controller,
+            obscureText: obscureText,
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: color,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(radius),
+                borderSide: BorderSide.none,
+              ),
+              contentPadding: EdgeInsets.symmetric(
+                horizontal: contentPaddingHorizontal,
+                vertical: contentPaddingVertical,
+              ),
+              suffixIcon: suffixIcon,
             ),
-            contentPadding: EdgeInsets.symmetric(horizontal: contentPaddingHorizontal, vertical: contentPaddingVertical),
-            suffixIcon: suffixIcon
           ),
         ),
       ],
