@@ -90,159 +90,177 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
               IconButton(onPressed: () {}, icon: Icon(Icons.search)),
             ],
           ),
-          body: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 37),
-              child: meal == null
-                  ? const Center(child: CircularProgressIndicator())
-                  : SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          YoutubePlayerBuilder(
-                            onExitFullScreen: () {
-                              SystemChrome.setPreferredOrientations(
-                                DeviceOrientation.values,
-                              );
-                            },
-                            player: YoutubePlayer(
-                              controller: _controller!,
-                              showVideoProgressIndicator: true,
-                              progressIndicatorColor: Colors.blueAccent,
-                              topActions: <Widget>[
-                                const SizedBox(width: 8.0),
-                                Expanded(
-                                  child: Text(
-                                    _controller?.metadata.title ?? '',
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18.0,
-                                    ),
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 1,
-                                  ),
-                                ),
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.settings,
-                                    color: Colors.white,
-                                    size: 25.0,
-                                  ),
-                                  onPressed: () {},
-                                ),
-                              ],
-                              onReady: () {},
-                              onEnded: (data) {},
-                            ),
-                            builder: (BuildContext p1, Widget p2) {
-                              return Column(children: [p2]);
-                            },
-                          ),
-                          if (_controller != null)
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 15,
-                                vertical: 7,
-                              ),
-                              height: 50,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15)),
-                                color: AppColors.redPink,
-                              ),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    flex: 1,
-                                    child: Text(
-                                      state.meals?.meals[0].strMeal ?? "",
-                                      style: TextStyle(color: AppColors.white, fontWeight: FontWeight.w500, fontSize: 20),
-                                      maxLines: 1,
-                                    ),
-                                  ),
-                                  Icon(Icons.star),
-                                  Text("4.2"),
-                                  Icon(Icons.timer),
-                                  Text("2.273"),
-                                ],
-                              ),
-                            ),
+          body: meal == null
+              ? const Center(child: CircularProgressIndicator())
+              : SingleChildScrollView(
+                  padding: const EdgeInsets.symmetric(horizontal: 37),
 
-                          const SizedBox(height: 25),
-                          Row(
-                            mainAxisAlignment: .spaceBetween,
-                            children: [
-                              const Image(
-                                image: AssetImage("assets/png/avatar.png"),
-                              ),
-                              SizedBox(width: 5,),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(18),
+                        ),
+                        child: YoutubePlayerBuilder(
+                          onExitFullScreen: () {
+                            SystemChrome.setPreferredOrientations(
+                              DeviceOrientation.values,
+                            );
+                          },
+                          player: YoutubePlayer(
+                            controller: _controller!,
+                            showVideoProgressIndicator: true,
+                            progressIndicatorColor: Colors.blueAccent,
+                            topActions: <Widget>[
+                              const SizedBox(width: 8.0),
                               Expanded(
-                                child: Column(
-                                  crossAxisAlignment: .start,
-                                  children: const [
-                                    Text("@josh-ryan"),
-                                    Text("Josh Ryan-Chef"),
-                                  ],
+                                child: Text(
+                                  _controller?.metadata.title ?? '',
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18.0,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
                                 ),
-                              ),
-                              ElevatedButton(
-                                onPressed: () {},
-                                child: const Text("Following"),
                               ),
                               IconButton(
+                                icon: const Icon(
+                                  Icons.settings,
+                                  color: Colors.white,
+                                  size: 25.0,
+                                ),
                                 onPressed: () {},
-                                icon: const Icon(Icons.more_vert),
                               ),
                             ],
+                            onReady: () {},
+                            onEnded: (data) {},
                           ),
-                          const SizedBox(height: 25),
-                          const Divider(height: 3, color: AppColors.redPink,),
-                          const SizedBox(height: 25),
-                          Row(
+                          builder: (BuildContext p1, Widget p2) {
+                            return Column(children: [p2]);
+                          },
+                        ),
+                      ),
+                      if (_controller != null)
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 15,
+                            vertical: 7,
+                          ),
+                          height: 50,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(18),
+                              bottomRight: Radius.circular(18),
+                            ),
+                            color: AppColors.redPink,
+                          ),
+                          child: Row(
                             children: [
-                              Text(
-                                "Details",
-                                style: TextStyle(
-                                  color: AppColors.redPink,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600,
+                              Expanded(
+                                flex: 1,
+                                child: Text(
+                                  state.meals?.meals[0].strMeal ?? "",
+                                  style: TextStyle(
+                                    color: AppColors.white,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 20,
+                                  ),
+                                  maxLines: 1,
                                 ),
                               ),
-                              SizedBox(width: 15,),
-                              Icon(Icons.timer, size: 12,),
-                              Text("45 min", style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),)
+                              Icon(Icons.star, size: 12, color: AppColors.white,),
+                              SizedBox(width: 5,),
+                              Text("4.2", style: TextStyle(fontSize: 12, fontWeight: .w400),),
+                              SizedBox(width: 10,),
+                              Icon(Icons.comment, size: 12, color: AppColors.white,),
+                              SizedBox(width: 5,),
+                              Text("2.273", style: TextStyle(fontSize: 12, fontWeight: .w400)),
                             ],
                           ),
-                          Text(meal.strInstructions),
-                          const SizedBox(height: 25),
+                        ),
+
+                      const SizedBox(height: 25),
+                      Row(
+                        mainAxisAlignment: .spaceBetween,
+                        children: [
+                          const Image(
+                            image: AssetImage("assets/png/avatar.png"),
+                          ),
+                          SizedBox(width: 5),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: .start,
+                              children: const [
+                                Text("@josh-ryan"),
+                                Text("Josh Ryan-Chef"),
+                              ],
+                            ),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {},
+                            child: const Text("Following"),
+                          ),
+                          IconButton(
+                            onPressed: () {},
+                            icon: const Icon(Icons.more_vert),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 25),
+                      const Divider(height: 3, color: AppColors.redPink),
+                      const SizedBox(height: 25),
+                      Row(
+                        children: [
                           Text(
-                            "Ingredients",
+                            "Details",
                             style: TextStyle(
                               color: AppColors.redPink,
                               fontSize: 20,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
-                          ListView.builder(
-                            itemCount: meal.strIngredient.length,
-                            scrollDirection: Axis.vertical,
-                            physics: const NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            itemBuilder: (context, index) {
-                              return Row(
-                                children: [
-                                  const Icon(Icons.arrow_right),
-                                  Text(
-                                    "${meal.strMeasure[index]} ${meal.strIngredient[index]}",
-                                  ),
-                                ],
-                              );
-                            },
+                          SizedBox(width: 15),
+                          Icon(Icons.timer, size: 12),
+                          Text(
+                            "45 min",
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
                         ],
                       ),
-                    ),
-            ),
-          ),
+                      Text(meal.strInstructions),
+                      const SizedBox(height: 25),
+                      Text(
+                        "Ingredients",
+                        style: TextStyle(
+                          color: AppColors.redPink,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      ListView.builder(
+                        itemCount: meal.strIngredient.length,
+                        scrollDirection: Axis.vertical,
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return Row(
+                            children: [
+                              const Icon(Icons.arrow_right),
+                              Text(
+                                "${meal.strMeasure[index]} ${meal.strIngredient[index]}",
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ),
         );
       },
     );

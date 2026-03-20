@@ -1,3 +1,4 @@
+import 'package:flutter_application_2/features/auth/domain/entities/user_entities.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppPrefs {

@@ -29,7 +29,7 @@ class CategoriesBloc extends Bloc<CategoriesEvent, CategoriesState> {
             state.copyWith(
               first: categories.categories.first,
               categories: CategoryEntities(
-                categories: categories.categories.skip(1).toList(),
+                categories: categories.categories,
               ),
             ),
           );

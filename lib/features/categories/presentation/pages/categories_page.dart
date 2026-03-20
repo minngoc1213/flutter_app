@@ -34,78 +34,92 @@ class _CategoriesPageState extends State<CategoriesPage> {
 
       body: SafeArea(
         bottom: false,
-        child: Padding(
+        child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 37),
-          child: SingleChildScrollView(
-            child: BlocBuilder<CategoriesBloc, CategoriesState>(
-              bloc: categoriesBloc,
-              builder: (context, state) {
-                if (state.categories == null) {
-                  return Center(child: CircularProgressIndicator());
-                }
-                return Column(
-                  children: [
-                    if (state.first != null) ...[
-                      Text(
-                        state.first?.strCategory ?? "",
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      ClipRRect(
-                        borderRadius: .circular(18),
-                        child: Image.network(
-                          state.first?.strCategoryThumb ?? "",
-                          height: 150,
-                          fit: .fill,
-                        ),
-                      ),
-                    ],
-                    SizedBox(height: 15.83),
-                    GridView.builder(
-                      padding: EdgeInsets.symmetric(horizontal: 16),
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: state.categories?.categories.length ?? 0,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 38,
-                        mainAxisSpacing: 10,
-                        childAspectRatio: 0.9,
-                      ),
-                      itemBuilder: (BuildContext context, int index) {
-                        return CustomImage(
-                          state
-                                  .categories
-                                  ?.categories[index]
-                                  .strCategoryThumb ??
-                              "",
-                          label:
-                              state.categories?.categories[index].strCategory ??
-                              "",
-                          onTap: () {
-                            context.push(
-                              AppRouteName.categoryDetailScreen,
-                              extra: CategoryArgument(
-                                category:
-                                    state
-                                        .categories
-                                        ?.categories[index]
-                                        .strCategory ??
-                                    "",
-                                categories: state.categories?.categories ?? [],
-                              ),
-                            );
-                          },
-                        );
+
+          child: BlocBuilder<CategoriesBloc, CategoriesState>(
+            bloc: categoriesBloc,
+            builder: (context, state) {
+              if (state.categories == null) {
+                return Center(child: CircularProgressIndicator());
+              }
+              return Column(
+                children: [
+                  if (state.first != null) ...[
+                    GestureDetector(
+                      onTap: () {
+                        context.push(
+                            AppRouteName.categoryDetailScreen,
+                            extra: CategoryArgument(
+                              category:
+                                  state.first?.strCategory ??
+                                  "",
+                              categories: state.categories?.categories ?? [],
+                            ),
+                          );
                       },
+                      child: Column(
+                        children: [
+                          Text(
+                            state.first?.strCategory ?? "",
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          ClipRRect(
+                            borderRadius: .circular(18),
+                            child: Container(
+                              width: size.width,
+                              color: AppColors.black,
+                              child: Image.network(
+                                state.first?.strCategoryThumb ?? "",
+                                height: 150,
+                                fit: .cover,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                    SizedBox(height: 90),
                   ],
-                );
-              },
-            ),
+                  SizedBox(height: 15.83),
+                  GridView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: state.categories?.categories.skip(1).toList().length ?? 0,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 38,
+                      mainAxisSpacing: 10,
+                      childAspectRatio: 1,
+                    ),
+                    itemBuilder: (BuildContext context, int index) {
+                      return CustomImage(
+                        state.categories?.categories.skip(1).toList()[index].strCategoryThumb ??
+                            "",
+                        label:
+                            state.categories?.categories.skip(1).toList()[index].strCategory ??
+                            "",
+                        onTap: () {
+                          context.push(
+                            AppRouteName.categoryDetailScreen,
+                            extra: CategoryArgument(
+                              category:
+                                  state.categories?.categories.skip(1).toList()[index]
+                                      .strCategory ??
+                                  "",
+                              categories: state.categories?.categories ?? [],
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  ),
+                  SizedBox(height: 90),
+                ],
+              );
+            },
           ),
         ),
       ),

@@ -250,20 +250,20 @@ class _HomePageState extends State<HomePage> {
                   return Card(
                     color: AppColors.redPink,
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 38,
-                        vertical: 14,
-                      ),
+                      padding: const EdgeInsets.symmetric(vertical: 14),
                       child: Column(
                         crossAxisAlignment: .start,
                         spacing: 9,
                         children: [
-                          Text(
-                            "Your Recipes",
-                            style: TextStyle(
-                              color: AppColors.white,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 36),
+                            child: Text(
+                              "Your Recipes",
+                              style: TextStyle(
+                                color: AppColors.white,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                           ),
                           SizedBox(
@@ -274,6 +274,9 @@ class _HomePageState extends State<HomePage> {
                                     itemCount: 4,
                                     scrollDirection: Axis.horizontal,
                                     shrinkWrap: true,
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 36,
+                                    ),
                                     separatorBuilder: (context, index) =>
                                         SizedBox(width: 25),
                                     itemBuilder: (context, index) {
@@ -299,7 +302,7 @@ class _HomePageState extends State<HomePage> {
                                                           ?.meals[0]
                                                           .strMealThumb ??
                                                       "",
-                                                  fit: .fitWidth,
+                                                  fit: .cover,
                                                   // height: 200,
                                                   // width: 162,
                                                 ),
@@ -315,9 +318,9 @@ class _HomePageState extends State<HomePage> {
                                                 horizontal: 15,
                                               ),
                                               width: 162,
-                                              height: 45,
+                                              height: 55,
                                               child: Column(
-                                                mainAxisAlignment: .end,
+                                                mainAxisAlignment: .center,
                                                 crossAxisAlignment: .start,
                                                 children: [
                                                   Text(
@@ -373,12 +376,13 @@ class _HomePageState extends State<HomePage> {
                   );
                 },
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 36),
-                child: Column(
-                  crossAxisAlignment: .start,
-                  children: [
-                    Text(
+              Column(
+                crossAxisAlignment: .start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 36),
+
+                    child: Text(
                       "Top Chef",
                       style: TextStyle(
                         fontSize: 15,
@@ -386,36 +390,36 @@ class _HomePageState extends State<HomePage> {
                         color: AppColors.redPink,
                       ),
                     ),
-                    SizedBox(height: 10),
-                    SizedBox(
-                      height: 190,
-                      width: size.width,
-                      child: ListView.separated(
-                        itemCount: 4,
-                        scrollDirection: Axis.horizontal,
-                        shrinkWrap: true,
-                        separatorBuilder: (context, index) =>
-                            SizedBox(width: 25),
-                        itemBuilder: (context, index) {
-                          return Column(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadiusGeometry.circular(8),
-                                child: Image.network(
-                                  "https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg",
-                                  fit: .cover,
-                                  height: 74,
-                                  width: 82,
-                                ),
+                  ),
+                  SizedBox(height: 10),
+                  SizedBox(
+                    height: 190,
+                    width: size.width,
+                    child: ListView.separated(
+                      itemCount: 4,
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      padding: EdgeInsets.symmetric(horizontal: 36),
+                      separatorBuilder: (context, index) => SizedBox(width: 25),
+                      itemBuilder: (context, index) {
+                        return Column(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadiusGeometry.circular(8),
+                              child: Image.network(
+                                "https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg",
+                                fit: .cover,
+                                height: 74,
+                                width: 82,
                               ),
-                              Text("Andrew"),
-                            ],
-                          );
-                        },
-                      ),
+                            ),
+                            Text("Andrew"),
+                          ],
+                        );
+                      },
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ],
           ),

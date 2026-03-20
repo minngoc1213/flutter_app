@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/core/color/app_color.dart';
 
 class CustomImage extends StatelessWidget {
   const CustomImage(
@@ -22,9 +23,12 @@ class CustomImage extends StatelessWidget {
           Expanded(
             child: ClipRRect(
               borderRadius: BorderRadiusGeometry.circular(18),
-              child: Image.network(
-                imageDir,
-                fit: BoxFit.fitHeight,
+              child: Container(
+                color: AppColors.black,
+                child: Image.network(
+                  imageDir,
+                  fit: BoxFit.fitHeight,
+                ),
               ),
             ),
           ),

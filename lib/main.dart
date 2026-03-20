@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/core/color/app_color.dart';
 import 'package:flutter_application_2/core/local_state/shared_preferences.dart';
 import 'package:flutter_application_2/di/di.dart';
 import 'package:flutter_application_2/features/profile/cubit/setting_cubit.dart';
@@ -34,7 +35,11 @@ class _MyAppState extends State<MyApp> {
           title: 'Flutter Demo',
           routerConfig: AppRoutes().router,
           themeMode: state.isDark ? ThemeMode.dark : ThemeMode.light,
-          theme: ThemeData.light(),
+          theme: ThemeData.light().copyWith(
+            scaffoldBackgroundColor: AppColors.white,
+            appBarTheme: AppBarTheme(backgroundColor: AppColors.white),
+            dialogTheme: DialogThemeData(backgroundColor: AppColors.white),
+          ),
           darkTheme: ThemeData.dark(),
         );
       },

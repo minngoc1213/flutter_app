@@ -76,7 +76,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             child: Column(
               children: [
                 Container(
-                  height: size.height * 0.3,
+                  height: size.height * 0.4,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [Colors.white, Colors.transparent],
@@ -87,10 +87,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 ),
                 Spacer(),
                 Stack(
-                  alignment: .center,
+                  alignment: .xy(0, -0.25),
                   children: [
                     Container(
-                      height: size.height * 0.2,
+                      height: size.height * 0.18,
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           colors: [Colors.white, Colors.transparent],
@@ -111,10 +111,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.pink,
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 56,
-                          vertical: 7,
-                        ),
+                        padding: EdgeInsets.symmetric(horizontal: 56),
                       ),
                       child: Text(
                         "Continue",
@@ -163,7 +160,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             child: Column(
               children: [
                 Container(
-                  height: size.height * 0.3,
+                  height: size.height * 0.4,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [Colors.white, Colors.transparent],
@@ -174,10 +171,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 ),
                 Spacer(),
                 Stack(
-                  alignment: .center,
+                  alignment: .xy(0, -0.25),
                   children: [
                     Container(
-                      height: size.height * 0.2,
+                      height: size.height * 0.18,
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           colors: [Colors.white, Colors.transparent],
@@ -198,10 +195,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.pink,
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 56,
-                          vertical: 7,
-                        ),
+                        padding: EdgeInsets.symmetric(horizontal: 56),
                       ),
                       child: Text(
                         "Continue",
@@ -254,15 +248,16 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             maxLines: 3,
           ),
           SizedBox(height: 28),
-          SizedBox(
-            width: 207,
-            child: ElevatedButton(
-              onPressed: () {
-                context.go(AppRouteName.registerScreen);
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.pink,
-                padding: EdgeInsets.symmetric(vertical: 7),
+          GestureDetector(
+            onTap: () {
+              context.go(AppRouteName.registerScreen);
+            },
+            child: Container(
+              width: 207, height: 45,
+              alignment: .center,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                color: AppColors.pink,
               ),
               child: Text(
                 "I'm New",
@@ -274,16 +269,17 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               ),
             ),
           ),
-          SizedBox(height: 20),
-          SizedBox(
-            width: 207,
-            child: ElevatedButton(
-              onPressed: () {
-                context.go(AppRouteName.loginScreen);
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.pink,
-                padding: EdgeInsets.symmetric(vertical: 7),
+          Container(height: 20),
+          GestureDetector(
+            onTap: () {
+              context.go(AppRouteName.registerScreen);
+            },
+            child: Container(
+              width: 207, height: 45,
+              alignment: .center,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                color: AppColors.pink,
               ),
               child: Text(
                 "I've Been Here",
@@ -295,6 +291,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               ),
             ),
           ),
+          SizedBox(height: 36),
         ],
       ),
     );
