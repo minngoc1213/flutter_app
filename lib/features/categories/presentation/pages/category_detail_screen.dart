@@ -52,7 +52,7 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
             child: Column(
               children: [
                 SizedBox(
-                  height: 40,
+                  height: 25,
                   child: ListView.separated(
                     padding: EdgeInsets.symmetric(horizontal: 25),
                     itemCount: widget.argument.categories.length,
@@ -70,10 +70,7 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
                           );
                         },
                         child: Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 9,
-                          ),
-                          height: 30,
+                          padding: EdgeInsets.symmetric(horizontal: 9),
                           alignment: .center,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(18),
@@ -107,7 +104,9 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
                 state.meals == null
                     ? Center(child: CircularProgressIndicator())
                     : GridView.builder(
-                        padding: EdgeInsets.symmetric(horizontal: size.width * 0.09),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: size.width * 0.09,
+                        ),
                         physics: NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         itemCount: state.meals?.meals.length ?? 0,
@@ -146,7 +145,10 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
                                       Text(
                                         "${state.meals?.meals[index].strMeal}\n",
                                         maxLines: 2,
-                                        style: TextStyle(fontSize: 12, fontWeight: .w400),
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: .w400,
+                                        ),
                                       ),
                                       Row(
                                         children: [
@@ -155,7 +157,7 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
                                             style: TextStyle(
                                               color: AppColors.sweetPink,
                                               fontSize: 12,
-                                              fontWeight: .w400
+                                              fontWeight: .w400,
                                             ),
                                           ),
                                           Icon(
@@ -174,7 +176,7 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
                                             style: TextStyle(
                                               color: AppColors.sweetPink,
                                               fontSize: 12,
-                                              fontWeight: .w400
+                                              fontWeight: .w400,
                                             ),
                                           ),
                                         ],
@@ -182,11 +184,26 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
                                     ],
                                   ),
                                 ),
-                                ClipRRect(
-                                  borderRadius: .circular(18),
-                                  child: Image.network(
-                                    state.meals?.meals[index].strMealThumb ??
-                                        "",
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(18),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(
+                                          0.2,
+                                        ),
+                                        blurRadius: 4,
+                                        spreadRadius: 0,
+                                        offset: Offset(0, 4),
+                                      ),
+                                    ],
+                                  ),
+                                  child: ClipRRect(
+                                    borderRadius: .circular(18),
+                                    child: Image.network(
+                                      state.meals?.meals[index].strMealThumb ??
+                                          "",
+                                    ),
                                   ),
                                 ),
                               ],

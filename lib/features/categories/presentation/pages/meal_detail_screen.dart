@@ -63,6 +63,7 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
     return BlocConsumer<MealDetailsBloc, MealDetailsState>(
       listener: (context, state) {
         if (state.meals != null && _controller == null) {
@@ -170,41 +171,77 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                                   maxLines: 1,
                                 ),
                               ),
-                              Icon(Icons.star, size: 12, color: AppColors.white,),
-                              SizedBox(width: 5,),
-                              Text("4.2", style: TextStyle(fontSize: 12, fontWeight: .w400),),
-                              SizedBox(width: 10,),
-                              Icon(Icons.comment, size: 12, color: AppColors.white,),
-                              SizedBox(width: 5,),
-                              Text("2.273", style: TextStyle(fontSize: 12, fontWeight: .w400)),
+                              Icon(
+                                Icons.star,
+                                size: 12,
+                                color: AppColors.white,
+                              ),
+                              SizedBox(width: 5),
+                              Text(
+                                "4.2",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: .w400,
+                                ),
+                              ),
+                              SizedBox(width: 10),
+                              Icon(
+                                Icons.comment,
+                                size: 12,
+                                color: AppColors.white,
+                              ),
+                              SizedBox(width: 5),
+                              Text(
+                                "2.273",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: .w400,
+                                ),
+                              ),
                             ],
                           ),
                         ),
 
                       const SizedBox(height: 25),
                       Row(
-                        mainAxisAlignment: .spaceBetween,
                         children: [
                           const Image(
                             image: AssetImage("assets/png/avatar.png"),
+                            width: 61,
                           ),
                           SizedBox(width: 5),
                           Expanded(
+                            flex: 1,
                             child: Column(
                               crossAxisAlignment: .start,
                               children: const [
-                                Text("@josh-ryan"),
-                                Text("Josh Ryan-Chef"),
+                                Text("@josh-ryan", maxLines: 1),
+                                Text("Josh Ryan-Chef", maxLines: 1),
                               ],
                             ),
                           ),
-                          ElevatedButton(
-                            onPressed: () {},
-                            child: const Text("Following"),
+                          SizedBox(width: 10),
+                          SizedBox(
+                            height: 21,
+                            child: ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColors.pink,
+                              ),
+                              child: const Text(
+                                "Following",
+                                style: TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: .w500,
+                                  color: AppColors.sweetPink,
+                                ),
+                              ),
+                            ),
                           ),
                           IconButton(
                             onPressed: () {},
                             icon: const Icon(Icons.more_vert),
+                            color: AppColors.redPink,
                           ),
                         ],
                       ),

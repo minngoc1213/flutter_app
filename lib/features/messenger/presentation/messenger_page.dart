@@ -64,9 +64,9 @@ class _MessengerPageState extends State<MessengerPage> {
                           });
                         },
                         child: Container(
+                          height: 25,
                           padding: EdgeInsets.symmetric(
                             horizontal: 9,
-                            vertical: 5,
                           ),
                           alignment: .center,
                           decoration: BoxDecoration(

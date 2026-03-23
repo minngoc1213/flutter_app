@@ -221,16 +221,29 @@ class _HomePageState extends State<HomePage> {
                                       ],
                                     ),
                                   ),
-                                  ClipRRect(
-                                    borderRadius: .circular(15),
-                                    child: SizedBox(
-                                      height: 143,
-                                      width: size.width,
-                                      child: Image.network(
-                                        state.meals?.meals[0].strMealThumb ??
-                                            "",
-                                        fit: .fitWidth,
-                                        height: 169,
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(18),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.2),
+                                          blurRadius: 4,
+                                          spreadRadius: 0,
+                                          offset: Offset(0, 4),
+                                        ),
+                                      ],
+                                    ),
+                                    child: ClipRRect(
+                                      borderRadius: .circular(15),
+                                      child: SizedBox(
+                                        height: 143,
+                                        width: size.width,
+                                        child: Image.network(
+                                          state.meals?.meals[0].strMealThumb ??
+                                              "",
+                                          fit: .fitWidth,
+                                          height: 169,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -249,6 +262,7 @@ class _HomePageState extends State<HomePage> {
                 builder: (context, state) {
                   return Card(
                     color: AppColors.redPink,
+                    margin: EdgeInsets.zero,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 14),
                       child: Column(
@@ -404,13 +418,26 @@ class _HomePageState extends State<HomePage> {
                       itemBuilder: (context, index) {
                         return Column(
                           children: [
-                            ClipRRect(
-                              borderRadius: BorderRadiusGeometry.circular(8),
-                              child: Image.network(
-                                "https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg",
-                                fit: .cover,
-                                height: 74,
-                                width: 82,
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(18),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.2),
+                                    blurRadius: 2,
+                                    spreadRadius: 0,
+                                    offset: Offset(0, 2),
+                                  ),
+                                ],
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadiusGeometry.circular(8),
+                                child: Image.network(
+                                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2POZrjRBgrTfCQcsVyXZnpoUKYGs9HEKjbw&s",
+                                  fit: .cover,
+                                  height: 74,
+                                  width: 82,
+                                ),
                               ),
                             ),
                             Text("Andrew"),
